@@ -1,0 +1,30 @@
+{
+  "name": "kinlo",
+  "version": "1.0.0",
+  "description": "**Connect. Share. Belong.** ---",
+  "main": "index.js",
+  "private": true,
+  "directories": {
+    "doc": "docs"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev --workspace=apps/server",
+    "dev:client": "npm run dev --workspace=apps/client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grintaking19/kinlo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Grintaking19/kinlo/issues"
+  },
+  "homepage": "https://github.com/Grintaking19/kinlo#readme"
+}
