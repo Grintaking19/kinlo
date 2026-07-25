@@ -1,16 +1,7 @@
-import express from "express";
-import config from "./config.js";
-import cors from "cors";
+import config from "./config/config.js";
+import app from "./app.js";
 
-
-const app = express();
 const PORT = config.PORT || 3000;
-
-// Middlewares
-app.use(cors());
-app.use(express.json());
-
-
 
 app.get("/health", (req, res) => {
   res.status(200).json({ message: "Server is running!" });
