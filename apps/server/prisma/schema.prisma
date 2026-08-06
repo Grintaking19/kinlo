@@ -13,6 +13,10 @@ datasource db {
   schemas  = ["users", "media", "posts", "chats", "engagements"]
 }
 
+// ---------------------------------------
+// User, Follow, and Media Models
+// ---------------------------------------
+
 model User {
   id        String   @id @default(cuid()) @map("id")
   clerkId   String   @unique @map("clerk_id")
@@ -52,10 +56,15 @@ model Follow {
   id          String @id @default(cuid())
   followerId  String @map("follower_id")
   followingId String @map("following_id")
-  follower    User   @relation("follower", fields: [followerId], references: [id])
-  following   User   @relation("following", fields: [followingId], references: [id])
 
+  // Relations
+  follower  User @relation("follower", fields: [followerId], references: [id])
+  following User @relation("following", fields: [followingId], references: [id])
+
+  // Constraints
   @@unique([followerId, followingId])
+  @@index([followingId])
+  @@map("follows")
   @@schema("users")
 }
 
@@ -128,6 +137,9 @@ model Post {
   // Comments
   comments Comment[] @relation("comments")
 
+  // Constraints
+  // @@index([userId, createdAt]) // For efficient Profile Feed queries
+
   @@map("posts")
   @@schema("posts")
 }
@@ -147,21 +159,29 @@ model Comment {
   parentComment Comment?  @relation("commentReplies", fields: [parentCommentId], references: [id])
   replies       Comment[] @relation("commentReplies")
 
+  // Constraints
+  // @@index([postId, createdAt]) // For efficient comment retrieval for a post
+
+
   @@map("comments")
   @@schema("posts")
 }
 
 model Story {
-  id        String   @id @default(cuid())
-  userId    String   @map("user_id")
-  content   String
-  mediaId   String?  @map("media_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  expiredAt DateTime @map("expired_at")
+  id         String   @id @default(cuid())
+  userId     String   @map("user_id")
+  content    String
+  mediaId    String?  @map("media_id")
+  background String? // Optional background color for text-based stories
+  createdAt  DateTime @default(now()) @map("created_at")
+  expiredAt  DateTime @map("expired_at")
 
   // Relations
   author User   @relation("stories", fields: [userId], references: [id])
   media  Media? @relation("storyMedia", fields: [mediaId], references: [id])
+
+  // Constraints
+  //@@index([userId, createdAt]) // For efficient Story Feed queries
 
   @@map("stories")
   @@schema("posts")
@@ -186,6 +206,10 @@ model Like {
 
   // Relations
   user User @relation("likes", fields: [userId], references: [id])
+
+  // Constraints
+  // @@unique([userId, TargetType, targetId])
+  // @@index([TargetType, targetId]) // For efficient like count queries on posts, comments, stories, and messages
 
   @@map("likes")
   @@schema("engagements")
@@ -219,6 +243,8 @@ model ConversationParticipant {
 
   // Constraints
   @@unique([conversationId, userId])
+
+
   @@map("conversation_participants")
   @@schema("chats")
 }
@@ -235,6 +261,10 @@ model Message {
   conversation Conversation @relation("messages", fields: [conversationId], references: [id])
   sender       User         @relation("messages", fields: [senderId], references: [id])
   media        Media?       @relation("messageMedia", fields: [mediaId], references: [id])
+
+  // Constraints
+  // @@index([conversationId, createdAt]) // For efficient message retrieval for a conversation
+  
 
   @@map("messages")
   @@schema("chats")
