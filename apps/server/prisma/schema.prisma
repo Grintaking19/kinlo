@@ -38,6 +38,11 @@ model User {
   posts    Post[]    @relation("posts")
   comments Comment[] @relation("comments")
   stories  Story[]   @relation("stories")
+  likes    Like[]    @relation("likes")
+  messages Message[] @relation("messages")
+
+  // Conversations
+  conversations ConversationParticipant[] @relation("ConversationParticipant")
 
   @@map("users")
   @@schema("users")
@@ -88,15 +93,19 @@ model Media {
   status    MediaStatus @default(PENDING)
 
   // Relations 
-  uploadedById String  @map("uploaded_by_id")
-  uploadedBy   User    @relation("uploadedBy", fields: [uploadedById], references: [id])
-  posts        Post[]  @relation("uploadedMedia")
-  stories      Story[] @relation("storyMedia")
+  uploadedById String    @map("uploaded_by_id")
+  uploadedBy   User      @relation("uploadedBy", fields: [uploadedById], references: [id])
+  posts        Post[]    @relation("uploadedMedia")
+  stories      Story[]   @relation("storyMedia")
+  messages     Message[] @relation("messageMedia")
 
   @@map("media")
   @@schema("media")
 }
 
+// ---------------------------------------
+// Post, Comment, Story, and Like Models
+// ---------------------------------------
 model Post {
   id        String    @id @default(cuid())
   userId    String    @map("user_id")
@@ -156,4 +165,77 @@ model Story {
 
   @@map("stories")
   @@schema("posts")
+}
+
+enum LikeableType {
+  POST
+  COMMENT
+  STORY
+  MESSAGE
+
+  @@map("likeable_type")
+  @@schema("engagements")
+}
+
+model Like {
+  id         String       @id @default(cuid())
+  userId     String       @map("user_id")
+  TargetType LikeableType @map("target_type")
+  targetId   String       @map("target_id") // Not FK -- Polymorphic relation, so This Could be Id of Post, Comment, Story, or Message
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation("likes", fields: [userId], references: [id])
+
+  @@map("likes")
+  @@schema("engagements")
+}
+
+// ---------------------------------------
+// Chat and Messaging Models
+// ---------------------------------------
+
+model Conversation {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  participants ConversationParticipant[] @relation("ConversationParticipant")
+  messages     Message[]                 @relation("messages")
+
+  @@map("conversations")
+  @@schema("chats")
+}
+
+model ConversationParticipant {
+  id             String   @id @default(cuid())
+  conversationId String   @map("conversation_id")
+  userId         String   @map("user_id")
+  joinedAt       DateTime @default(now()) @map("joined_at")
+
+  // Relations
+  conversation Conversation @relation("ConversationParticipant", fields: [conversationId], references: [id])
+  user         User         @relation("ConversationParticipant", fields: [userId], references: [id])
+
+  // Constraints
+  @@unique([conversationId, userId])
+  @@map("conversation_participants")
+  @@schema("chats")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String   @map("conversation_id")
+  senderId       String   @map("sender_id")
+  content        String
+  mediaId        String?  @map("media_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  // Relations
+  conversation Conversation @relation("messages", fields: [conversationId], references: [id])
+  sender       User         @relation("messages", fields: [senderId], references: [id])
+  media        Media?       @relation("messageMedia", fields: [mediaId], references: [id])
+
+  @@map("messages")
+  @@schema("chats")
 }
