@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  schemas = ["users", "media", "posts", "chats", "engagements"]
+  schemas  = ["users", "media", "posts", "chats", "engagements"]
 }
 
 model User {
@@ -34,9 +34,10 @@ model User {
   following Follow[] @relation("following")
 
   // Content
-  media Media[] @relation("uploadedBy")
-  posts Post[]  @relation("posts")
-
+  media    Media[]   @relation("uploadedBy")
+  posts    Post[]    @relation("posts")
+  comments Comment[] @relation("comments")
+  stories  Story[]   @relation("stories")
 
   @@map("users")
   @@schema("users")
@@ -56,6 +57,7 @@ model Follow {
 enum MediaType {
   IMAGE
   VIDEO
+
   @@map("media_type")
   @@schema("media")
 }
@@ -64,18 +66,19 @@ enum MediaStatus {
   PENDING
   FAILED
   READY
+
   @@map("media_status")
   @@schema("media")
 }
 
 model Media {
   // Necessary fields for media management 
-  id        String      @id @default(cuid())
-  fileId    String      @unique @map("file_id")
-  filePath  String      @map("file_path")
-  url       String
-  type      MediaType
-  
+  id       String    @id @default(cuid())
+  fileId   String    @unique @map("file_id")
+  filePath String    @map("file_path")
+  url      String
+  type     MediaType
+
   // Optional fields for media metadata
   width     Int?
   height    Int?
@@ -85,9 +88,10 @@ model Media {
   status    MediaStatus @default(PENDING)
 
   // Relations 
-  uploadedById String @map("uploaded_by_id")
-  uploadedBy   User   @relation("uploadedBy", fields: [uploadedById], references: [id])
-  posts        Post[] @relation("uploadedMedia")
+  uploadedById String  @map("uploaded_by_id")
+  uploadedBy   User    @relation("uploadedBy", fields: [uploadedById], references: [id])
+  posts        Post[]  @relation("uploadedMedia")
+  stories      Story[] @relation("storyMedia")
 
   @@map("media")
   @@schema("media")
@@ -105,16 +109,51 @@ model Post {
   sharedPostId String? @map("shared_post_id")
 
   // Relations
-  uploadedBy User    @relation("posts", fields: [userId], references: [id])
-  media      Media?  @relation("uploadedMedia", fields: [mediaId], references: [id])
-  
-  sharedPost Post?   @relation("shares", fields: [sharedPostId], references: [id])
-  shares     Post[]  @relation("shares")
+  author User   @relation("posts", fields: [userId], references: [id])
+  media  Media? @relation("uploadedMedia", fields: [mediaId], references: [id])
+
+  // Self-referential relation for shared posts
+  sharedPost Post?  @relation("shares", fields: [sharedPostId], references: [id])
+  shares     Post[] @relation("shares")
+
+  // Comments
+  comments Comment[] @relation("comments")
 
   @@map("posts")
   @@schema("posts")
 }
 
+model Comment {
+  id              String   @id @default(cuid())
+  postId          String   @map("post_id")
+  userId          String   @map("user_id")
+  parentCommentId String?  @map("parent_comment_id")
+  content         String
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
 
+  // Relations
+  post          Post      @relation("comments", fields: [postId], references: [id])
+  author        User      @relation("comments", fields: [userId], references: [id])
+  parentComment Comment?  @relation("commentReplies", fields: [parentCommentId], references: [id])
+  replies       Comment[] @relation("commentReplies")
 
+  @@map("comments")
+  @@schema("posts")
+}
 
+model Story {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  content   String
+  mediaId   String?  @map("media_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  expiredAt DateTime @map("expired_at")
+
+  // Relations
+  author User   @relation("stories", fields: [userId], references: [id])
+  media  Media? @relation("storyMedia", fields: [mediaId], references: [id])
+
+  @@map("stories")
+  @@schema("posts")
+}
