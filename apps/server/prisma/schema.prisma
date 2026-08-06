@@ -10,6 +10,111 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  schemas = ["users", "media", "posts", "chats", "engagements"]
 }
+
+model User {
+  id        String   @id @default(cuid()) @map("id")
+  clerkId   String   @unique @map("clerk_id")
+  email     String   @unique
+  fullName  String   @map("full_name")
+  avatarUrl String   @map("avatar_url")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Optional fields (General user information)
+  bio       String?
+  location  String?
+  work      String?
+  education String?
+  birthday  DateTime?
+
+  // Social Graph/Connections (Followers/Following)
+  followers Follow[] @relation("follower")
+  following Follow[] @relation("following")
+
+  // Content
+  media Media[] @relation("uploadedBy")
+  posts Post[]  @relation("posts")
+
+
+  @@map("users")
+  @@schema("users")
+}
+
+model Follow {
+  id          String @id @default(cuid())
+  followerId  String @map("follower_id")
+  followingId String @map("following_id")
+  follower    User   @relation("follower", fields: [followerId], references: [id])
+  following   User   @relation("following", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+  @@schema("users")
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  @@map("media_type")
+  @@schema("media")
+}
+
+enum MediaStatus {
+  PENDING
+  FAILED
+  READY
+  @@map("media_status")
+  @@schema("media")
+}
+
+model Media {
+  // Necessary fields for media management 
+  id        String      @id @default(cuid())
+  fileId    String      @unique @map("file_id")
+  filePath  String      @map("file_path")
+  url       String
+  type      MediaType
+  
+  // Optional fields for media metadata
+  width     Int?
+  height    Int?
+  sizeBytes Int?        @map("size_bytes")
+  duration  Int?        @map("duration")
+  createdAt DateTime    @default(now()) @map("created_at")
+  status    MediaStatus @default(PENDING)
+
+  // Relations 
+  uploadedById String @map("uploaded_by_id")
+  uploadedBy   User   @relation("uploadedBy", fields: [uploadedById], references: [id])
+  posts        Post[] @relation("uploadedMedia")
+
+  @@map("media")
+  @@schema("media")
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  content   String
+  createdAt DateTime  @default(now()) @map("created_at")
+  mediaId   String?   @map("media_id")
+  deletedAt DateTime? @map("deleted_at") // Soft delete timestamp (to handle post deletions in case of shared posts)
+
+  // Share 
+  sharedPostId String? @map("shared_post_id")
+
+  // Relations
+  uploadedBy User    @relation("posts", fields: [userId], references: [id])
+  media      Media?  @relation("uploadedMedia", fields: [mediaId], references: [id])
+  
+  sharedPost Post?   @relation("shares", fields: [sharedPostId], references: [id])
+  shares     Post[]  @relation("shares")
+
+  @@map("posts")
+  @@schema("posts")
+}
+
+
 
 
