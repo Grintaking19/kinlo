@@ -92,7 +92,7 @@ async function seedFollows(users) {
         pairs.add(pairKey);
         data.push({
           followerId: user.id,
-          followeeId: followee.id,
+          followingId: followee.id,
         });
       }
     }
