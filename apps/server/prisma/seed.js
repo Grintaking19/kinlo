@@ -28,7 +28,7 @@ function pickRandom(arr, count) {
 }
 
 async function clearDatabase() {
-  console.log("Clearing database...");
+  console.log("🧹Clearing database...");
 
   // Order matters due to foreign key constraints
   // children should be deleted before parents
@@ -45,7 +45,7 @@ async function clearDatabase() {
 }
 
 async function seedUsers() {
-  console.log(`Seeding ${NUM_USERS} users...`);
+  console.log(`👤 Seeding ${NUM_USERS} users...`);
   const users = [];
   for (let i = 0; i < NUM_USERS; i++) {
     const fullName = faker.person.fullName();
@@ -80,7 +80,7 @@ async function seedUsers() {
 }
 
 async function seedFollows(users) {
-  console.log(`Seeding follows...`);
+  console.log(`👥 Seeding follows...`);
   const pairs = new Set();
   const data = [];
   for (const user of users) {
@@ -98,11 +98,11 @@ async function seedFollows(users) {
     }
   }
   await prisma.follow.createMany({ data, skipDuplicates: true });
-  console.log(`Seeded ${data.length} follows.`);
+  console.log(`👥 Seeded ${data.length} follows.`);
 }
 
 async function seedPosts(users) {
-  console.log(`Seeding posts...`);
+  console.log(`📝 Seeding posts...`);
   const posts = [];
   for (const user of users) {
     const numPosts = faker.number.int({ min: 1, max: MAX_POSTS_PER_USER });
@@ -117,12 +117,12 @@ async function seedPosts(users) {
       posts.push(post);
     }
   }
-  console.log(`Seeded ${posts.length} posts.`);
+  console.log(`📝 Seeded ${posts.length} posts.`);
   return posts;
 }
 
 async function seedComments(posts, users) {
-  console.log(`Seeding comments...`);
+  console.log(`💬 Seeding comments...`);
   let count = 0;
   for (const post of posts) {
     const numComments = faker.number.int({
@@ -154,7 +154,7 @@ async function seedComments(posts, users) {
       }
     }
   }
-  console.log(`Seeded ${count} comments.`);
+  console.log(`💬 Seeded ${count} comments.`);
 }
 
 async function main() {
