@@ -1,6 +1,61 @@
-@import "tailwindcss";
 @config "../tailwind.config.js"
+@import "tailwindcss";
 
 @theme {
-    
+  /* Surfaces */
+  --color-bg: #0a0a0d;
+  --color-surface: #17171c;
+  --color-surface-2: #1e1e26;
+  --color-surface-3: #2e2e38;
+  --color-border: #2e2e38;
+
+  /* Text */
+  --color-text: #fafafa;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+
+  /* Brand / Primary (violet) */
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary: #8b5cf6;
+
+  /* Accent / Secondary */
+  --color-teal-500: #14b8a6;
+  --color-cyan-500: #22d3ee;
+  --color-pink-500: #ec4899;
+  --color-green-500: #22c55e;
+  --color-yellow-500: #f59e0b;
+  --color-red-500: #ef4444;
+
+  /* Gradient stops  */
+  --color-gradient-cta-start: #7c3aed; /* violet */
+  --color-gradient-cta-end: #3b82f6; /* blue */
+  --color-gradient-save-start: #14b8a6; /* teal */
+  --color-gradient-save-end: #8b5cf6; /* violet */
+
+  /* Type */
+  --font-sans: "Inter", sans-serif;
+
+  /* Spacing rhythm (8px base) */
+  --spacing: 0.5rem;
+}
+
+[data-theme="light"] {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f5f9;
+  --color-surface-3: #e2e8f0;
+  --color-border: #e2e8f0;
+
+  --color-text: #0f172a;
+  --color-text-secondary: #647587;
+  --color-text-muted: #94a3b8;
+
+  --color-teal-500: #0d9488;
+  --color-cyan-500: #0891b2;
+  --color-pink-500: #db2777;
+  --color-green-500: #16a34a;
+  --color-yellow-500: #d97706;
+  --color-red-500: #dc2626;
 }
