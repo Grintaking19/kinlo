@@ -1,4 +1,3 @@
-@config "../tailwind.config.js"
 @import "tailwindcss";
 
 @theme {
@@ -28,11 +27,16 @@
   --color-yellow-500: #f59e0b;
   --color-red-500: #ef4444;
 
+  /* Avatar */
+  --color-avatar-fallback: #3f3f46;
+
   /* Gradient stops  */
   --color-gradient-cta-start: #7c3aed; /* violet */
   --color-gradient-cta-end: #3b82f6; /* blue */
   --color-gradient-save-start: #14b8a6; /* teal */
   --color-gradient-save-end: #8b5cf6; /* violet */
+  --color-gradient-follow-start: #7c3aed; /* violet */
+  --color-gradient-follow-end: #8b5cf6; /* lighter violet */
 
   /* Type */
   --font-sans: "Inter", sans-serif;
