@@ -1,18 +1,18 @@
-import Button from './components/layout/Button.jsx'
+import Button from "./components/layout/Button.jsx";
+import InputField from "./components/layout/InputField.jsx";
 
-import './App.css'
+import "./App.css";
 
 function App() {
-
   return (
-    <>
-      <Button variant="danger" size="sm" icon={
-        <span>⚠️</span>
-      }>
-        Click me
-      </Button>
-    </>
-  )
+    <div className="bg-bg min-h-screen">
+      <InputField
+        placeholder="Enter your username"
+        size="md"
+        icon={<span>🔍</span>} //Search Icon
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;
