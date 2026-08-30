@@ -1,4 +1,3 @@
-import Button from "./components/layout/Button.jsx";
 import InputField from "./components/layout/InputField.jsx";
 
 import "./App.css";
@@ -9,7 +8,20 @@ function App() {
       <InputField
         placeholder="Enter your username"
         size="md"
-        icon={<span>🔍</span>} //Search Icon
+        label="Username"
+        error={true}
+        errorMessage="Invalid username"
+        disabled={false}
+        aria-label="Username"
+      />
+
+      <InputField
+        placeholder="Enter your username"
+        size="md"
+        label="Username"
+        error={true}
+        errorMessage="Invalid username"
+        disabled={false}
       />
     </div>
   );

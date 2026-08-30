@@ -12,6 +12,7 @@
   --color-text: #fafafa;
   --color-text-secondary: #a1a1aa;
   --color-text-muted: #71717a;
+  --color-text-placeholder: #52525B;
 
   /* Brand / Primary (violet) */
   --color-primary-300: #c4b5fd;
@@ -26,6 +27,7 @@
   --color-green-500: #22c55e;
   --color-yellow-500: #f59e0b;
   --color-red-500: #ef4444;
+  --color-red-400: #e65a5a;
 
   /* Avatar */
   --color-avatar-fallback: #3f3f46;
@@ -71,4 +73,5 @@
   --color-green-500: #16a34a;
   --color-yellow-500: #d97706;
   --color-red-500: #dc2626;
+  --color-red-400: #d43232;
 }
