@@ -6,7 +6,9 @@ function App() {
 
   return (
     <>
-      <Button>
+      <Button variant="danger" size="sm" icon={
+        <span>⚠️</span>
+      }>
         Click me
       </Button>
     </>
