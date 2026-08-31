@@ -1,4 +1,3 @@
-import React from "react";
 import defaultAvatar from "../../assets/images/default-avatar-profile-icon.avif";
 
 const SIZES = {
@@ -33,12 +32,10 @@ const Avatar = ({ src, size = "md", alt = "User Avatar", className = "" }) => {
   }
 
   const sizeClass = size ? SIZES[size] : SIZES.md;
-  const id = React.useId();
 
   return (
     <div className={`overflow-hidden rounded-full bg-surface-2 ${sizeClass}`}>
       <img
-        id={`avatar-${id}`}
         src={src || defaultAvatar}
         alt={alt || "User Avatar"}
         className={`block w-full h-full object-cover rounded-full  ${className}`}
