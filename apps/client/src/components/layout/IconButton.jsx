@@ -1,5 +1,3 @@
-import React from "react";
-
 const SIZES = {
   sm: "w-8 h-8", // 32px — composer bar (video/photo/reel)
   md: "w-9 h-9", // 36px — top bar (add/search/chat)
@@ -65,9 +63,7 @@ const IconButton = ({
     `}
       {...props}
     >
-      <span className={`${iconSizeClass}`}>
-        {icon}
-      </span>
+      <span className={`${iconSizeClass}`}>{icon}</span>
     </button>
   );
 };
