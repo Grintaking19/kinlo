@@ -1,39 +1,12 @@
-import React from "react";
-import NavItem from "./components/layout/NavItem";
+import StatBlock from "./components/layout/StatBlock.jsx";
 import "./App.css";
 
 function App() {
-  const [activeNavItem, setActiveNavItem] = React.useState(false);
-  const handleNavItemClick = () => {
-    setActiveNavItem(!activeNavItem);
-  }
+  
   return (
      
     <div className="bg-bg min-h-screen p-10">
-      <NavItem 
-        href="#"
-        size="sm"
-        icon={
-          <svg
-
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-full h-full"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-            />
-          </svg>
-        }
-        active={activeNavItem}
-        onClick={handleNavItemClick}
-        aria-label="Home"
-      />
+      <StatBlock size="md" orientation="horizontal" gradient={false} number="42" label="Followers" />
     </div>
   );
 }
