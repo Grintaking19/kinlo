@@ -52,8 +52,8 @@
   /* Type */
   --font-sans: "Inter", sans-serif;
 
-  /* Spacing rhythm (8px base) */
-  --spacing: 0.5rem;
+  /* Spacing rhythm (4px base) */
+  --spacing: 0.25rem;
 }
 
 [data-theme="light"] {
