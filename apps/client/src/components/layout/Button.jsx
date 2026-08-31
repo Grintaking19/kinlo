@@ -1,4 +1,3 @@
-import React from "react";
 
 const GRADIENTS = {
   cta: "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end hover:from-gradient-cta-start-hover hover:to-gradient-cta-end-hover shadow-md hover:shadow-lg",
@@ -40,7 +39,6 @@ const Button = ({
   children,
   ...props
 }) => {
-  const id = React.useId();
 
   /*
    * Guarding against invalid logical combinations of variant and gradient.
@@ -86,7 +84,6 @@ const Button = ({
   return (
     <button
       disabled={disabled}
-      id={id}
       className={`inline-flex items-center justify-center transition-all duration-250  
         ${variantClass} ${gradientClass} ${sizeClass} ${className}
         ${disabled ? "opacity-50 cursor-not-allowed" : "hover:cursor-pointer"}
