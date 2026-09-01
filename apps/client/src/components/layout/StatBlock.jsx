@@ -78,7 +78,7 @@ const StatBlock = ({
     : "text-text";
 
   return (
-    <div className={`${className} ${orientationClasses}`}>
+    <div className={`${orientationClasses} ${className}`}>
       <span className={`${sizeClasses.number} ${gradientClasses}`}>
         {number}
       </span>
