@@ -1,3 +1,5 @@
+import { RouterLink } from "../../lib/router";
+
 const SIZES = {
   sm: "w-11 h-11", // TopBar NavItem (Desktop)
   md: "w-13 h-13",
@@ -64,7 +66,7 @@ const NavItem = ({
   const stateClass = active ? variantClass.active : variantClass.inactive;
 
   return (
-    <a
+    <RouterLink
       href={href}
       className={`flex items-center justify-center 
             rounded-lg transition-colors duration-200  ease-in-out
@@ -77,7 +79,7 @@ const NavItem = ({
       aria-label={ariaLabel}
     >
       <span className={`${iconSizeClass}`}>{icon}</span>
-    </a>
+    </RouterLink>
   );
 };
 
