@@ -6,7 +6,7 @@ const SIZES = {
   lg: "w-10 h-10",
 };
 
-const Avatar = ({ src, size = "md", alt = "User Avatar", className = "" }) => {
+const Avatar = ({ src, size = "md", alt = "User Avatar", className = "", wrapperClassName = "" }) => {
   if (!Object.keys(SIZES).includes(size) && size !== null) {
     if (import.meta.env.DEV) {
       console.error(
@@ -34,7 +34,7 @@ const Avatar = ({ src, size = "md", alt = "User Avatar", className = "" }) => {
   const sizeClass = size ? SIZES[size] : SIZES.md;
 
   return (
-    <div className={`overflow-hidden rounded-full bg-surface-2 ${sizeClass}`}>
+    <div className={`overflow-hidden rounded-full bg-surface-2 ${sizeClass} ${wrapperClassName}`}>
       <img
         src={src || defaultAvatar}
         alt={alt || "User Avatar"}
