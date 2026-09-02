@@ -1,3 +1,5 @@
+import { RouterLink } from "../../lib/router";
+
 const VARIANTS = {
   minimal: {
     active: "bg-surface-2 text-primary-300",
@@ -49,7 +51,7 @@ const SideNavItem = ({
     : VARIANTS[variant].inactive;
 
   return (
-    <a
+    <RouterLink
       href={href}
       className={`flex flex-row items-center justify-start px-3.5 py-2.75 gap-3.5 transition-all duration-300 ease-in-out rounded-lg
         ${stateClasses} ${className}
@@ -65,7 +67,7 @@ const SideNavItem = ({
           {notificationCount}
         </span>
       )}
-    </a>
+    </ RouterLink>
   );
 };
 
