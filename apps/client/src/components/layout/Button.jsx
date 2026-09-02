@@ -1,3 +1,4 @@
+import { RouterLink } from "../../lib/router";
 
 const GRADIENTS = {
   cta: "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end hover:from-gradient-cta-start-hover hover:to-gradient-cta-end-hover shadow-md hover:shadow-lg",
@@ -30,6 +31,8 @@ const SIZES = {
 };
 
 const Button = ({
+  as: Component = "button",
+  href,
   variant = "primary",
   size = "md",
   gradient = "cta",
@@ -39,7 +42,6 @@ const Button = ({
   children,
   ...props
 }) => {
-
   /*
    * Guarding against invalid logical combinations of variant and gradient.
    */
@@ -75,6 +77,18 @@ const Button = ({
     size = "md";
   }
 
+  if (import.meta.env.DEV && Component === RouterLink && !href) {
+    console.error(
+      `Button: \`href\` is required when using the \`as='${RouterLink}'\` prop. This button will not function as a link without an \`href\`.`,
+    );
+  }
+
+  if (import.meta.env.DEV && ["Button", RouterLink].includes(Component)) {
+    console.error(
+      `Button: \`as\` prop must be either "button" or "${RouterLink}". Received: ${Component}`,
+    );
+  }
+
   // Handle NULL values for variant, gradients and size.
   const variantClass = variant ? VARIANTS[variant] : "";
   const gradientClass =
@@ -82,8 +96,11 @@ const Button = ({
   const sizeClass = size ? SIZES[size] : "";
 
   return (
-    <button
-      disabled={disabled}
+    <Component
+      disabled={Component === "button" ? disabled : undefined}
+      aria-disabled={Component === RouterLink ? disabled : undefined}
+      href={Component === RouterLink ? href : undefined}
+      type={Component === "button" ? "button" : undefined}
       className={`inline-flex items-center justify-center transition-all duration-250  
         ${variantClass} ${gradientClass} ${sizeClass} ${className}
         ${disabled ? "opacity-50 cursor-not-allowed" : "hover:cursor-pointer"}
@@ -92,7 +109,7 @@ const Button = ({
     >
       {icon && <span className="mr-0.5">{icon}</span>}
       {children}
-    </button>
+    </Component>
   );
 };
 
