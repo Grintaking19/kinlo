@@ -2,7 +2,9 @@ import React from 'react'
 
 const SideNavBar = () => {
   return (
-    <div></div>
+    <div>
+        
+    </div>
   )
 }
 
