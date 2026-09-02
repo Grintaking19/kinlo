@@ -1,4 +1,5 @@
 import React from "react";
+import { RouterLink } from "../../lib/router";
 import NavItem from "../layout/NavItem";
 import Avatar from "../layout/Avatar";
 import HomeIcon from "../../assets/icons/home-icon.svg?react";
@@ -9,7 +10,7 @@ import NotificationsIcon from "../../assets/icons/notifications-icon.svg?react";
 const navItems = [
   {
     label: "Home",
-    icon: <HomeIcon  />,
+    icon: <HomeIcon />,
     href: "/",
   },
   {
@@ -45,7 +46,7 @@ const MobileBottomNavBar = ({ currentPath = "/" }) => {
         />
       ))}
 
-      <a
+      <RouterLink
         href="/profile"
         active={currentPath === "/profile"}
         aria-label="Profile"
@@ -62,7 +63,7 @@ const MobileBottomNavBar = ({ currentPath = "/" }) => {
           size="md"
           wrapperClassName={`${currentPath === "/profile" ? "ring-2 ring-primary-500" : ""}`}
         />
-      </a>
+      </RouterLink>
     </nav>
   );
 };
