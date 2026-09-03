@@ -1,5 +1,5 @@
 import React from "react";
-import { RouterLink } from "../../lib/router";
+import { RouterLink } from "../../lib/router.jsx";
 import NavItem from "../layout/NavItem";
 import Avatar from "../layout/Avatar";
 import HomeIcon from "../../assets/icons/home-icon.svg?react";

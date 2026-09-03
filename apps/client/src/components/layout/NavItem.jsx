@@ -1,4 +1,4 @@
-import { RouterLink } from "../../lib/router";
+import { RouterLink } from "../../lib/router.jsx";
 
 const SIZES = {
   sm: "w-11 h-11", // TopBar NavItem (Desktop)

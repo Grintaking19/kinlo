@@ -1,4 +1,4 @@
-import { RouterLink } from "../../lib/router";
+import { RouterLink } from "../../lib/router.jsx";
 
 const GRADIENTS = {
   cta: "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end hover:from-gradient-cta-start-hover hover:to-gradient-cta-end-hover shadow-md hover:shadow-lg",

@@ -1,4 +1,16 @@
+@import url("https://googleapis.com");
 @import "tailwindcss";
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-bg);
+}
 
 @theme {
   /* Surfaces */
@@ -12,7 +24,7 @@
   --color-text: #fafafa;
   --color-text-secondary: #a1a1aa;
   --color-text-muted: #71717a;
-  --color-text-placeholder: #52525B;
+  --color-text-placeholder: #52525b;
 
   /* Brand / Primary (violet) */
   --color-primary-300: #c4b5fd;
@@ -37,7 +49,6 @@
   --color-gradient-cta-end: #3b82f6; /* blue */
   --color-gradient-cta-start-hover: #7c3acd;
   --color-gradient-cta-end-hover: #2373fa;
-
 
   --color-gradient-save-start: #14b8a6; /* teal */
   --color-gradient-save-end: #8b5cf6; /* violet */

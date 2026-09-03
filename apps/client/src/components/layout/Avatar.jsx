@@ -34,7 +34,7 @@ const Avatar = ({ src, size = "md", alt = "User Avatar", className = "", wrapper
   const sizeClass = size ? SIZES[size] : SIZES.md;
 
   return (
-    <div className={`overflow-hidden rounded-full bg-surface-2 ${sizeClass} ${wrapperClassName}`}>
+    <div className={`overflow-hidden flex shrink-0 rounded-full bg-surface-2 ${sizeClass} ${wrapperClassName}`}>
       <img
         src={src || defaultAvatar}
         alt={alt || "User Avatar"}

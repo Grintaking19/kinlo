@@ -53,6 +53,8 @@ const IconButton = ({
       className={`
         inline-flex items-center justify-center
         text-text
+        rounded-lg
+        shrink-0
         ${active ? "bg-surface-2" : "bg-transparent hover:bg-surface-2/60"}
         hover:cursor-pointer
         disabled:cursor-not-allowed disabled:opacity-50
@@ -63,7 +65,7 @@ const IconButton = ({
     `}
       {...props}
     >
-      <span className={`${iconSizeClass}`}>{icon}</span>
+      <span className={`${iconSizeClass} `}>{icon}</span>
     </button>
   );
 };

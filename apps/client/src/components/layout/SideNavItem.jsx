@@ -1,4 +1,4 @@
-import { RouterLink } from "../../lib/router";
+import { RouterLink } from "../../lib/router.jsx";
 
 const VARIANTS = {
   minimal: {
@@ -12,6 +12,7 @@ const SideNavItem = ({
   icon = null,
   label = null,
   className = "",
+  iconClassName = "",
   active = false,
   variant = "minimal",
   "aria-label": ariaLabel,
@@ -58,16 +59,20 @@ const SideNavItem = ({
         `}
       {...props}
     >
-      <span className={`w-5 h-5 shrink-0`}>{icon}</span>
-      <span className={`flex text-base font-semibold leading-normal  w-full`}>
+      <span
+        className={`shrink-0 [&>svg]:w-full [&>svg]:h-full ${iconClassName}`}
+      >
+        {icon}
+      </span>
+      <span className={`flex text-base font-normal leading-normal  w-full`}>
         {label}
       </span>
       {notificationCount > 0 && (
-        <span className="flex justify-center items-center ml-auto text-xs font-semibold bg-pink-500 text-text  rounded-full px-2 py-0.5">
+        <span className="flex justify-center items-center ml-auto text-xs font-bold bg-pink-500 text-text  rounded-full px-2 py-0.5">
           {notificationCount}
         </span>
       )}
-    </ RouterLink>
+    </RouterLink>
   );
 };
 
