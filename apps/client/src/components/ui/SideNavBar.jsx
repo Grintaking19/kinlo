@@ -3,54 +3,8 @@ import Logo from "../layout/Logo.jsx";
 import SideNavItem from "../layout/SideNavItem.jsx";
 import Button from "../layout/Button.jsx";
 import UserRow from "../ui/UserRow.jsx";
-import {
-  Home,
-  MessageCircle,
-  Bell,
-  Users,
-  Compass,
-  User,
-  Settings,
-  Plus,
-} from "lucide-react";
-
-const navItems = [
-  {
-    label: "Feed",
-    href: "/",
-    icon: <Home />,
-  },
-  {
-    label: "Messages",
-    href: "/messages",
-    icon: <MessageCircle />,
-  },
-  {
-    label: "Notifications",
-    href: "/notifications",
-    icon: <Bell />,
-  },
-  {
-    label: "Groups",
-    href: "/groups",
-    icon: <Users />,
-  },
-  {
-    label: "Discover",
-    href: "/discover",
-    icon: <Compass />,
-  },
-  {
-    label: "Profile",
-    href: "/profile",
-    icon: <User />,
-  },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: <Settings />,
-  },
-];
+import { sideNavItems } from "../../config/Navigation.jsx";
+import { Plus } from "lucide-react";
 
 const SideNavBar = ({ currentPath = "/" }) => {
   const id = React.useId();
@@ -58,7 +12,7 @@ const SideNavBar = ({ currentPath = "/" }) => {
     <aside className="hidden lg:flex flex-col w-72 h-screen px-5 py-6 gap-1 justify-start items-start bg-bg border-r border-border">
       <Logo className="mb-10" />
       <nav className="flex flex-col gap-1 w-full mb-3">
-        {navItems.map((item) => (
+        {sideNavItems.map((item) => (
           <SideNavItem
             key={`${id}-${item.label}`}
             href={item.href}

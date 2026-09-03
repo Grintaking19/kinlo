@@ -1,3 +1,4 @@
+import React from "react";
 import { RouterLink } from "../../lib/router.jsx";
 
 const VARIANTS = {
@@ -51,6 +52,12 @@ const SideNavItem = ({
     ? VARIANTS[variant].active
     : VARIANTS[variant].inactive;
 
+  const styledIcon = React.isValidElement(icon)
+    ? React.cloneElement(icon, {
+        className: `${iconClassName} ${icon.props.className || ""}`.trim(),
+      })
+    : icon;
+
   return (
     <RouterLink
       href={href}
@@ -62,7 +69,7 @@ const SideNavItem = ({
       <span
         className={`shrink-0 [&>svg]:w-full [&>svg]:h-full ${iconClassName}`}
       >
-        {icon}
+        {styledIcon}
       </span>
       <span className={`flex text-base font-normal leading-normal  w-full`}>
         {label}
