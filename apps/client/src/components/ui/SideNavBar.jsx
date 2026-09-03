@@ -3,50 +3,52 @@ import Logo from "../layout/Logo.jsx";
 import SideNavItem from "../layout/SideNavItem.jsx";
 import Button from "../layout/Button.jsx";
 import UserRow from "../ui/UserRow.jsx";
-import HomeIcon from "../../assets/icons/home-icon.svg?react";
-import MessagesIcon from "../../assets/icons/messages-icon.svg?react";
-import NotificationsIcon from "../../assets/icons/notifications-icon.svg?react";
-import GroupsIcon from "../../assets/icons/groups-icon.svg?react";
-import DiscoverIcon from "../../assets/icons/discover-icon.svg?react";
-import ProfileIcon from "../../assets/icons/profile-icon.svg?react";
-import SettingsIcon from "../../assets/icons/settings-icon.svg?react";
-import PlusIcon from "../../assets/icons/plus-icon.svg?react";
+import {
+  Home,
+  MessageCircle,
+  Bell,
+  Users,
+  Compass,
+  User,
+  Settings,
+  Plus,
+} from "lucide-react";
 
 const navItems = [
   {
     label: "Feed",
     href: "/",
-    icon: <HomeIcon />,
+    icon: <Home />,
   },
   {
     label: "Messages",
     href: "/messages",
-    icon: <MessagesIcon />,
+    icon: <MessageCircle />,
   },
   {
     label: "Notifications",
     href: "/notifications",
-    icon: <NotificationsIcon />,
+    icon: <Bell />,
   },
   {
     label: "Groups",
     href: "/groups",
-    icon: <GroupsIcon />,
+    icon: <Users />,
   },
   {
     label: "Discover",
     href: "/discover",
-    icon: <DiscoverIcon />,
+    icon: <Compass />,
   },
   {
     label: "Profile",
     href: "/profile",
-    icon: <ProfileIcon />,
+    icon: <User />,
   },
   {
     label: "Settings",
     href: "/settings",
-    icon: <SettingsIcon />,
+    icon: <Settings />,
   },
 ];
 
@@ -72,7 +74,7 @@ const SideNavBar = ({ currentPath = "/" }) => {
         variant="primary"
         gradient="save"
         className="flex flex-row gap-2  w-full text-text font-semibold text-base leading-4.5 rounded-[10px] py-3.25"
-        icon={<PlusIcon />}
+        icon={<Plus />}
         aria-label="Create Post"
       >
         Create a Post

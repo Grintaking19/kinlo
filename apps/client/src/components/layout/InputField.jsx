@@ -1,5 +1,5 @@
 import React from "react";
-import { IoIosAlert } from "react-icons/io";
+import {AlertCircle} from "lucide-react";
 
 const SIZES = {
   sm: "text-sm px-3 py-1 rounded-md",
@@ -58,6 +58,12 @@ const InputField = ({
   const inputId = `input-${id}`;
   const errorId = `${inputId}-error`;
 
+  const styledIcon = React.isValidElement(icon)
+    ? React.cloneElement(icon, {
+        className: `${icon.props.className || ""}`.trim(),
+      })
+    : icon;
+
   return (
     <div className={`flex flex-col gap-1  text-text py-1 mb-2`}>
       {label && (
@@ -68,7 +74,7 @@ const InputField = ({
       <div className="relative">
         {icon && (
           <span className="absolute text-text-muted inset-y-0 left-1 flex items-center  pointer-events-none">
-            {icon}
+            {styledIcon}
           </span>
         )}
         <input
@@ -95,7 +101,7 @@ const InputField = ({
             className="absolute top-full left-0  text-sm text-red-400"
             role="alert"
           >
-            <IoIosAlert className="inline-block mr-1 " size={16} />
+            <AlertCircle className="inline-block mr-1 " size={16} />
             {errorMessage}
           </p>
         )}

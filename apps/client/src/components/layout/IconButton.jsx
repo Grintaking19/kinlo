@@ -1,3 +1,5 @@
+import React from "react";
+
 const SIZES = {
   sm: "w-8 h-8", // 32px — composer bar (video/photo/reel)
   md: "w-9 h-9", // 36px — top bar (add/search/chat)
@@ -11,7 +13,7 @@ const ICON_SIZES = {
 };
 
 const IconButton = ({
-  icon,
+  icon = null,
   size = "md",
   active = false,
   "aria-label": ariaLabel,
@@ -44,6 +46,13 @@ const IconButton = ({
   const sizeClass = size ? SIZES[size] : SIZES["md"];
   const iconSizeClass = size ? ICON_SIZES[size] : ICON_SIZES["md"];
 
+  // Since we are using lucide-react icons
+  const sizedIcon = React.isValidElement(icon)
+    ? React.cloneElement(icon, {
+        className: `${iconSizeClass} ${icon.props.className || ""}`.trim(),
+      })
+    : icon;
+
   return (
     <button
       type="button"
@@ -65,7 +74,7 @@ const IconButton = ({
     `}
       {...props}
     >
-      <span className={`${iconSizeClass} `}>{icon}</span>
+      {sizedIcon}
     </button>
   );
 };

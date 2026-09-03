@@ -1,3 +1,4 @@
+import React from "react";
 import { RouterLink } from "../../lib/router.jsx";
 
 const GRADIENTS = {
@@ -95,6 +96,14 @@ const Button = ({
     variant === "primary" ? GRADIENTS[gradient] || GRADIENTS["cta"] : "";
   const sizeClass = size ? SIZES[size] : "";
 
+  const styledIcon = React.isValidElement(icon) ? (
+    React.cloneElement(icon, {
+      className: `mr-0.5 ${icon.props.className || ""}`.trim(),
+    })
+  ) : (
+    <span className="mr-0.5">icon</span>
+  );
+
   return (
     <Component
       disabled={Component === "button" ? disabled : undefined}
@@ -107,7 +116,7 @@ const Button = ({
         `}
       {...props}
     >
-      {icon && <span className="mr-0.5">{icon}</span>}
+      {styledIcon}
       {children}
     </Component>
   );
