@@ -1,15 +1,16 @@
+import React from "react";
 import { RouterLink } from "../../lib/router.jsx";
 
 const SIZES = {
-  sm: "w-11 h-11", // TopBar NavItem (Desktop)
-  md: "w-13 h-13",
-  lg: "w-16 h-15", // TopBar NavItem (Mobile)
+  sm: "w-9 h-9", // TopBar NavItem (Mobile)
+  md: "w-11 h-11", // TopBar NavItem (Desktop)
+  lg: "w-16 h-13.5", // BottomBar NavItem (Mobile)
 };
 
 const ICONS_SIZES = {
-  sm: "w-5.5 h-5.5", // TopBar NavItem (Desktop)
-  md: "w-6 h-6",
-  lg: "w-7 h-7", // TopBar NavItem (Mobile)
+  sm: "w-4.5 h-4.5", // TopBar NavItem (Mobile)
+  md: "w-5.5 h-5.5", // TopBar NavItem (Desktop)
+  lg: "w-7 h-7", // BottomBar NavItem (Mobile)
 };
 
 const VARIANTS = {
@@ -21,6 +22,10 @@ const VARIANTS = {
     active: "text-primary-400",
     inactive: "text-text-secondary hover:bg-surface-2",
   },
+  nav_minimal: {
+    active: "text-primary-400",
+    inactive: "text-text hover:bg-surface-2",
+  },
 };
 
 const NavItem = ({
@@ -29,7 +34,7 @@ const NavItem = ({
   icon = null,
   className = "",
   active = false,
-  variant = "pill",
+  variant = "minimal",
   "aria-label": ariaLabel,
   ...props
 }) => {
@@ -65,6 +70,13 @@ const NavItem = ({
   const variantClass = variant ? VARIANTS[variant] : VARIANTS.pill;
   const stateClass = active ? variantClass.active : variantClass.inactive;
 
+  const styledIcon = React.isValidElement(icon)
+    ? React.cloneElement(icon, {
+        className:
+          `${iconSizeClass} ${icon.props.className || "inherit"}`.trim(),
+      })
+    : icon;
+
   return (
     <RouterLink
       href={href}
@@ -78,7 +90,7 @@ const NavItem = ({
       aria-current={active ? "page" : undefined}
       aria-label={ariaLabel}
     >
-      <span className={`${iconSizeClass}`}>{icon}</span>
+      {styledIcon}
     </RouterLink>
   );
 };

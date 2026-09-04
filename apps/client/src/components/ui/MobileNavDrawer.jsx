@@ -22,35 +22,35 @@ const MobileNavDrawer = ({ currentPath = "/" }) => {
           <Dialog.Description className="sr-only">
             This is a mobile navigation drawer.
           </Dialog.Description>
-            <aside className="flex flex-col w-72 h-screen px-5 py-6 gap-1 justify-start items-start bg-bg border-r border-border">
-                <Logo className="mb-10" />
-                <nav className="flex flex-col gap-1 w-full mb-3">
-                    {sideNavItems.map((item) => (
-                        <SideNavItem
-                            key={item.label}
-                            href={item.href}
-                            icon={item.icon}
-                            iconClassName="w-5 h-5"
-                            label={item.label}
-                            aria-label={item.label}
-                            active={currentPath === item.href}
-                        />
-                    ))}
-                </nav>
-                <Button
-                    variant="primary"
-                    gradient="save"
-                    className="flex flex-row gap-2  w-full text-text font-semibold text-base leading-4.5 rounded-[10px] py-3.25"
-                    icon={<Plus />}
-                    aria-label="Create Post"
-                >
-                    Create a Post
-                </Button>
-                <div className="flex-1" />{" "}
-                {/* this one genuinely IS a flex-spacer — pushes UserRow down */}
-                <div className="border-t border-border self-stretch shrink-0" />
-                <UserRow fullName="John Doe" username="@johndoe" />
-            </aside>
+          <aside className="flex flex-col w-72 h-screen px-5 py-6 gap-1 justify-start items-start bg-bg border-r border-border">
+            <Logo className="mb-10" />
+            <nav className="flex flex-col gap-1 w-full mb-3">
+              {sideNavItems.map((item) => (
+                <SideNavItem
+                  key={item.label}
+                  href={item.href}
+                  icon={item.icon}
+                  iconClassName="w-5 h-5"
+                  label={item.label}
+                  aria-label={item.label}
+                  active={currentPath === item.href}
+                />
+              ))}
+            </nav>
+            <Button
+              variant="primary"
+              gradient="save"
+              className="flex flex-row gap-2  w-full text-text font-semibold text-base leading-4.5 rounded-[10px] py-3.25"
+              icon={<Plus />}
+              aria-label="Create Post"
+            >
+              Create a Post
+            </Button>
+            <div className="flex-1" />{" "}
+            {/* this one genuinely IS a flex-spacer — pushes UserRow down */}
+            <div className="border-t border-border self-stretch shrink-0" />
+            <UserRow fullName="John Doe" username="@johndoe" />
+          </aside>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

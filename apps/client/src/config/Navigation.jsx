@@ -6,6 +6,9 @@ import {
   Compass,
   User,
   Settings,
+  Search,
+  MessageSquare,
+  SquarePlus,
 } from "lucide-react";
 
 export const sideNavItems = [
