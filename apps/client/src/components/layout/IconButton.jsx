@@ -1,4 +1,4 @@
-import React from "react";
+import styleIcon from "../../utils/sizedIcon.jsx";
 
 const SIZES = {
   sm: "w-8 h-8", // 32px — composer bar (video/photo/reel)
@@ -47,11 +47,7 @@ const IconButton = ({
   const iconSizeClass = size ? ICON_SIZES[size] : ICON_SIZES["md"];
 
   // Since we are using lucide-react icons
-  const sizedIcon = React.isValidElement(icon)
-    ? React.cloneElement(icon, {
-        className: `${iconSizeClass} ${icon.props.className || ""}`.trim(),
-      })
-    : icon;
+  const styledIcon = styleIcon(icon, iconSizeClass);
 
   return (
     <button
@@ -74,7 +70,7 @@ const IconButton = ({
     `}
       {...props}
     >
-      {sizedIcon}
+      {styledIcon}
     </button>
   );
 };

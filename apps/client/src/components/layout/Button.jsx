@@ -1,6 +1,5 @@
-import React from "react";
 import { RouterLink } from "../../lib/router.jsx";
-
+import styleIcon from "../../utils/sizedIcon.jsx";
 const GRADIENTS = {
   cta: "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end hover:from-gradient-cta-start-hover hover:to-gradient-cta-end-hover shadow-md hover:shadow-lg",
   save: "bg-gradient-to-r from-gradient-save-start to-gradient-save-end hover:from-gradient-save-start-hover hover:to-gradient-save-end-hover shadow-md hover:shadow-lg",
@@ -96,13 +95,7 @@ const Button = ({
     variant === "primary" ? GRADIENTS[gradient] || GRADIENTS["cta"] : "";
   const sizeClass = size ? SIZES[size] : "";
 
-  const styledIcon = React.isValidElement(icon) ? (
-    React.cloneElement(icon, {
-      className: `mr-0.5 ${icon.props.className || ""}`.trim(),
-    })
-  ) : (
-    <span className="mr-0.5">icon</span>
-  );
+  const styledIcon = styleIcon(icon, sizeClass, "mr-0.5");
 
   return (
     <Component

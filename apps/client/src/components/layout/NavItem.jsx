@@ -1,6 +1,5 @@
-import React from "react";
 import { RouterLink } from "../../lib/router.jsx";
-
+import styleIcon from "../../utils/sizedIcon.jsx";
 const SIZES = {
   sm: "w-9 h-9", // TopBar NavItem (Mobile)
   md: "w-11 h-11", // TopBar NavItem (Desktop)
@@ -70,12 +69,7 @@ const NavItem = ({
   const variantClass = variant ? VARIANTS[variant] : VARIANTS.pill;
   const stateClass = active ? variantClass.active : variantClass.inactive;
 
-  const styledIcon = React.isValidElement(icon)
-    ? React.cloneElement(icon, {
-        className:
-          `${iconSizeClass} ${icon.props.className || "inherit"}`.trim(),
-      })
-    : icon;
+  const styledIcon = styleIcon(icon, iconSizeClass);
 
   return (
     <RouterLink

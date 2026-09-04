@@ -1,4 +1,4 @@
-import React from "react";
+import styleIcon from "../../utils/sizedIcon.jsx";
 import { RouterLink } from "../../lib/router.jsx";
 
 const VARIANTS = {
@@ -52,11 +52,7 @@ const SideNavItem = ({
     ? VARIANTS[variant].active
     : VARIANTS[variant].inactive;
 
-  const styledIcon = React.isValidElement(icon)
-    ? React.cloneElement(icon, {
-        className: `${iconClassName} ${icon.props.className || ""}`.trim(),
-      })
-    : icon;
+  const styledIcon = styleIcon(icon)
 
   return (
     <RouterLink

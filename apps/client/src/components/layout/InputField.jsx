@@ -1,4 +1,5 @@
 import React from "react";
+import styleIcon from "../../utils/sizedIcon.jsx";
 import {AlertCircle} from "lucide-react";
 
 const SIZES = {
@@ -58,11 +59,7 @@ const InputField = ({
   const inputId = `input-${id}`;
   const errorId = `${inputId}-error`;
 
-  const styledIcon = React.isValidElement(icon)
-    ? React.cloneElement(icon, {
-        className: `${icon.props.className || ""}`.trim(),
-      })
-    : icon;
+  const styledIcon = styleIcon(icon, "w-4 h-4 text-text-muted");
 
   return (
     <div className={`flex flex-col gap-1  text-text py-1 mb-2`}>
