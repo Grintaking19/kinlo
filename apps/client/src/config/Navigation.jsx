@@ -64,3 +64,26 @@ export const topNavItems = [
     icon: <Users />,
   },
 ];
+
+export const bottomMobileNavItems = [
+  {
+    label: "Home",
+    icon: <Home />,
+    href: "/",
+  },
+  {
+    label: "reels",
+    icon: <SquarePlay />,
+    href: "/reels",
+  },
+  {
+    label: "groups",
+    icon: <Users />,
+    href: "/groups",
+  },
+  {
+    label: "notifications",
+    icon: <Bell />,
+    href: "/notifications",
+  },
+];

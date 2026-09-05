@@ -1,4 +1,4 @@
-import styleIcon from "../../utils/sizedIcon.jsx";
+import styleIcon from "../../utils/styleIcon.jsx";
 
 const SIZES = {
   sm: "w-8 h-8", // 32px — composer bar (video/photo/reel)

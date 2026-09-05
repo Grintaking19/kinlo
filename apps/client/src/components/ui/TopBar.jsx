@@ -1,7 +1,8 @@
 import InputField from "../layout/InputField.jsx";
 import IconButton from "../layout/IconButton.jsx";
 import NavItem from "../layout/NavItem.jsx";
-import { Bell, Search, MessageSquare } from "lucide-react";
+import NotificationsDropdown from "./NotificationsDropdown.jsx";
+import {Search, MessageSquare } from "lucide-react";
 import { topNavItems } from "../../config/Navigation.jsx";
 import Avatar from "../layout/Avatar";
 
@@ -37,13 +38,7 @@ const TopBar = ({ currentPath = "/", className = "" }) => {
           size="lg"
           variant="minimal"
         />
-        <IconButton
-          aria-label="Notifications"
-          icon={<Bell />}
-          size="lg"
-          variant="minimal"
-          className="hover:rounded-full"
-        />
+        <NotificationsDropdown />
         <button
           type="button"
           aria-label="User Settings"
@@ -52,8 +47,7 @@ const TopBar = ({ currentPath = "/", className = "" }) => {
           <Avatar
             size="md"
             wrapperClassName="hover:border-2 hover:border-primary"
-          />{" "}
-          {/* On Active = true, add border (FUTURE WORK) */}
+          />
         </button>
       </div>
     </header>

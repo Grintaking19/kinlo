@@ -1,5 +1,5 @@
 import { RouterLink } from "../../lib/router.jsx";
-import styleIcon from "../../utils/sizedIcon.jsx";
+import styleIcon from "../../utils/styleIcon.jsx";
 const SIZES = {
   sm: "w-9 h-9", // TopBar NavItem (Mobile)
   md: "w-11 h-11", // TopBar NavItem (Desktop)

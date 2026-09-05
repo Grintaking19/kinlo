@@ -1,5 +1,5 @@
 import { RouterLink } from "../../lib/router.jsx";
-import styleIcon from "../../utils/sizedIcon.jsx";
+import styleIcon from "../../utils/styleIcon.jsx";
 const GRADIENTS = {
   cta: "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end hover:from-gradient-cta-start-hover hover:to-gradient-cta-end-hover shadow-md hover:shadow-lg",
   save: "bg-gradient-to-r from-gradient-save-start to-gradient-save-end hover:from-gradient-save-start-hover hover:to-gradient-save-end-hover shadow-md hover:shadow-lg",
@@ -95,7 +95,7 @@ const Button = ({
     variant === "primary" ? GRADIENTS[gradient] || GRADIENTS["cta"] : "";
   const sizeClass = size ? SIZES[size] : "";
 
-  const styledIcon = styleIcon(icon, sizeClass, "mr-0.5");
+  const styledIcon = styleIcon(icon, "w-4.5 h-4.5");
 
   return (
     <Component

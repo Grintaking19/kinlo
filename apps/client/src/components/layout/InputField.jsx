@@ -1,5 +1,5 @@
 import React from "react";
-import styleIcon from "../../utils/sizedIcon.jsx";
+import styleIcon from "../../utils/styleIcon.jsx";
 import { AlertCircle } from "lucide-react";
 
 const SIZES = {

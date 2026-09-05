@@ -2,38 +2,12 @@ import React from "react";
 import { RouterLink } from "../../lib/router.jsx";
 import NavItem from "../layout/NavItem";
 import Avatar from "../layout/Avatar";
-import HomeIcon from "../../assets/icons/home-icon.svg?react";
-import ReelsIcon from "../../assets/icons/reels-icon.svg?react";
-import GroupsIcon from "../../assets/icons/groups-icon.svg?react";
-import NotificationsIcon from "../../assets/icons/notifications-icon.svg?react";
-
-const navItems = [
-  {
-    label: "Home",
-    icon: <HomeIcon />,
-    href: "/",
-  },
-  {
-    label: "reels",
-    icon: <ReelsIcon />,
-    href: "/reels",
-  },
-  {
-    label: "groups",
-    icon: <GroupsIcon />,
-    href: "/groups",
-  },
-  {
-    label: "notifications",
-    icon: <NotificationsIcon />,
-    href: "/notifications",
-  },
-];
+import {bottomMobileNavItems as navItems} from "../../config/Navigation.jsx";
 
 const MobileBottomNavBar = ({ currentPath = "/" }) => {
   const id = React.useId();
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 flex flex-row justify-around items-center py-2 pt-2.5 pb-3.5 bg-bg border-t border-border">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 flex flex-row justify-between items-center px-2 pt-2.5 pb-3.5 bg-bg border-t border-border overflow-hidden z-50">
       {navItems.map((item) => (
         <NavItem
           key={`${id}-${item.label}`}

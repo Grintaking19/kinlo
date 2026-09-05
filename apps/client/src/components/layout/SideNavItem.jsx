@@ -1,4 +1,4 @@
-import styleIcon from "../../utils/sizedIcon.jsx";
+import styleIcon from "../../utils/styleIcon.jsx";
 import { RouterLink } from "../../lib/router.jsx";
 
 const VARIANTS = {
@@ -52,22 +52,18 @@ const SideNavItem = ({
     ? VARIANTS[variant].active
     : VARIANTS[variant].inactive;
 
-  const styledIcon = styleIcon(icon)
+  const styledIcon = styleIcon(icon, "h-5 w-5");
 
   return (
     <RouterLink
       href={href}
-      className={`flex flex-row items-center justify-start px-3.5 py-2.75 gap-3.5 transition-all duration-300 ease-in-out rounded-lg
+      className={`flex flex-row items-center justify-center px-3.5 py-2.75 gap-3.5 transition-all duration-300 ease-in-out rounded-lg
         ${stateClasses} ${className}
         `}
       {...props}
     >
-      <span
-        className={`shrink-0 [&>svg]:w-full [&>svg]:h-full ${iconClassName}`}
-      >
-        {styledIcon}
-      </span>
-      <span className={`flex text-base font-normal leading-normal  w-full`}>
+      <span className={`shrink-0  ${iconClassName}`}>{styledIcon}</span>
+      <span className={`flex  font-normal leading-normal  w-full text-[15px]`}>
         {label}
       </span>
       {notificationCount > 0 && (

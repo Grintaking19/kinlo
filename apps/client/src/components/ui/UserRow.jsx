@@ -2,7 +2,7 @@ import Avatar from "../layout/Avatar.jsx";
 import IconButton from "../layout/IconButton.jsx";
 // import LogoutIcon from "../../assets/icons/logout-icon.svg?react";
 import { LogOut } from "lucide-react";
-const UserRow = ({ fullName, username }) => {
+const UserRow = ({ fullName="John Doe", username="john_doe" }) => {
   return (
     <div className="flex flex-row gap-3 items-center justify-between w-full">
       <Avatar size="md" />
