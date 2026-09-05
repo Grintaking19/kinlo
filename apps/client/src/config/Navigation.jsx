@@ -6,6 +6,7 @@ import {
   Compass,
   User,
   Settings,
+  SquarePlay,
 } from "lucide-react";
 
 export const sideNavItems = [
@@ -43,5 +44,23 @@ export const sideNavItems = [
     label: "Settings",
     href: "/settings",
     icon: <Settings />,
+  },
+];
+
+export const topNavItems = [
+  {
+    label: "Feed",
+    href: "/",
+    icon: <Home />,
+  },
+  {
+    label: "Reels",
+    href: "/reels",
+    icon: <SquarePlay />,
+  },
+  {
+    label: "Groups",
+    href: "/groups",
+    icon: <Users />,
   },
 ];

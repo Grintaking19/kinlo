@@ -12,10 +12,27 @@ const ICON_SIZES = {
   lg: "w-5 h-5", // 20px — profile (avatar)
 };
 
+const VARIANTS = {
+  minimal: {
+    active: "text-primary-400",
+    inactive: "text-text-secondary hover:bg-surface-2",
+  },
+  pill: {
+    active: "bg-surface-3 text-primary",
+    inactive: "text-text-secondary hover:bg-surface-2",
+  },
+  nav_minimal: {
+    active: "text-primary-400",
+    inactive: "text-text hover:bg-surface-2",
+  },
+};
+
+
 const IconButton = ({
   icon = null,
   size = "md",
   active = false,
+  variant = "minimal",
   "aria-label": ariaLabel,
   className = "",
   disabled = false,
@@ -43,8 +60,17 @@ const IconButton = ({
     );
   }
 
+  if (import.meta.env.DEV && !Object.keys(VARIANTS).includes(variant)) {
+    console.error(
+      `IconButton: Invalid variant provided: ${variant}. Valid variants are: ${Object.keys(VARIANTS).join(", ")}. Defaulting to "minimal".`,
+    );
+    variant = "minimal";
+  } 
+
+
   const sizeClass = size ? SIZES[size] : SIZES["md"];
   const iconSizeClass = size ? ICON_SIZES[size] : ICON_SIZES["md"];
+  const stateClass = active ? VARIANTS[variant].active : VARIANTS[variant].inactive;
 
   // Since we are using lucide-react icons
   const styledIcon = styleIcon(icon, iconSizeClass);
@@ -60,7 +86,7 @@ const IconButton = ({
         text-text
         rounded-lg
         shrink-0
-        ${active ? "bg-surface-2" : "bg-transparent hover:bg-surface-2/60"}
+        ${stateClass}
         hover:cursor-pointer
         disabled:cursor-not-allowed disabled:opacity-50
         transition-colors duration-200 ease-in-out

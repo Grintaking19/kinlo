@@ -1,6 +1,6 @@
 import React from "react";
 import styleIcon from "../../utils/sizedIcon.jsx";
-import {AlertCircle} from "lucide-react";
+import { AlertCircle } from "lucide-react";
 
 const SIZES = {
   sm: "text-sm px-3 py-1 rounded-md",
@@ -68,28 +68,29 @@ const InputField = ({
           {label}
         </label>
       )}
-      <div className="relative">
+      <div
+        className={`flex items-center gap-2 rounded-md bg-surface-2 border
+          ${error ? "border-red-500" : "border-border"}
+          focus-within:ring-2 ${error ? "focus-within:ring-red-500" : "focus-within:ring-primary/40"}
+          focus-within:border-transparent
+          transition-colors duration-200
+          ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+          ${sizeClass}
+          ${className}`}
+      >
         {icon && (
-          <span className="absolute text-text-muted inset-y-0 left-1 flex items-center  pointer-events-none">
+          <span className="text-text-muted shrink-0 flex items-center">
             {styledIcon}
           </span>
         )}
+
         <input
           {...props}
           id={inputId}
           placeholder={placeholder}
           disabled={disabled}
           aria-label={!label ? ariaLabel : undefined}
-          className={`${sizeClass}
-             bg-surface-2 border  focus:outline-none focus:ring-2 focus:border-transparent
-            ${error ? "focus:ring-red-500 border-red-500" : "focus:ring-primary/40 border-border"} 
-            text-text
-            placeholder:text-text-placeholder
-            disabled:bg-surface-3 disabled:text-text-muted disabled:cursor-not-allowed
-            mb-1
-            ${icon ? "pl-5" : ""}
-            ${className}
-            `}
+          className="flex-1 bg-transparent outline-none placeholder:text-text-placeholder disabled:cursor-not-allowed"
           aria-invalid={error}
           aria-describedby={error ? errorId : undefined}
         />

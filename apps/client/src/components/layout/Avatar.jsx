@@ -3,7 +3,8 @@ import defaultAvatar from "../../assets/images/default-avatar-profile-icon.avif"
 const SIZES = {
   sm: "w-6 h-6",
   md: "w-8 h-8",
-  lg: "w-10 h-10",
+  lg: "w-9 h-9", // This is for the TopBar Avatar
+  xl: "w-10 h-10",
 };
 
 const Avatar = ({ src, size = "md", alt = "User Avatar", className = "", wrapperClassName = "" }) => {
