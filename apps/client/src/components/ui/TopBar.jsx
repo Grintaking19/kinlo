@@ -2,9 +2,9 @@ import InputField from "../layout/InputField.jsx";
 import IconButton from "../layout/IconButton.jsx";
 import NavItem from "../layout/NavItem.jsx";
 import NotificationsDropdown from "./NotificationsDropdown.jsx";
+import AccountDropdown from "./AccountDropdown.jsx";
 import {Search, MessageSquare } from "lucide-react";
 import { topNavItems } from "../../config/Navigation.jsx";
-import Avatar from "../layout/Avatar";
 
 const TopBar = ({ currentPath = "/", className = "" }) => {
   return (
@@ -39,16 +39,7 @@ const TopBar = ({ currentPath = "/", className = "" }) => {
           variant="minimal"
         />
         <NotificationsDropdown />
-        <button
-          type="button"
-          aria-label="User Settings"
-          className="flex items-center justify-center w-9 h-9 rounded-full bg-surface-2 hover:bg-surface-3 hover:cursor-pointer transition-colors duration-200 ease-in-out"
-        >
-          <Avatar
-            size="md"
-            wrapperClassName="hover:border-2 hover:border-primary"
-          />
-        </button>
+        <AccountDropdown />
       </div>
     </header>
   );
