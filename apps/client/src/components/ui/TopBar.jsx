@@ -3,7 +3,7 @@ import IconButton from "../layout/IconButton.jsx";
 import NavItem from "../layout/NavItem.jsx";
 import NotificationsDropdown from "./NotificationsDropdown.jsx";
 import AccountDropdown from "./AccountDropdown.jsx";
-import {Search, MessageSquare } from "lucide-react";
+import { Search, MessageSquare } from "lucide-react";
 import { topNavItems } from "../../config/Navigation.jsx";
 
 const TopBar = ({ currentPath = "/", className = "" }) => {

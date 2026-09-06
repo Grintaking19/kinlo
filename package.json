@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/Grintaking19/kinlo/issues"
   },
-  "homepage": "https://github.com/Grintaking19/kinlo#readme"
+  "homepage": "https://github.com/Grintaking19/kinlo#readme",
+  "dependencies": {
+    "@clerk/clerk-react": "^5.61.9"
+  }
 }
