@@ -12,6 +12,30 @@ body {
   background: var(--color-bg);
 }
 
+.clerk-gradient-button {
+  background: linear-gradient(
+    110deg,
+    var(--color-gradient-cta-start),
+    var(--color-gradient-cta-end)
+  ) !important;
+  border: 0 !important;
+  color: #ffffff !important;
+  transition: filter 160ms ease, transform 160ms ease !important;
+}
+
+.clerk-gradient-button:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.clerk-gradient-button:active {
+  transform: translateY(0);
+}
+
+.clerk-social-button {
+  color: var(--color-text) !important;
+}
+
 @theme {
   /* Surfaces */
   --color-bg: #0a0a0d;
