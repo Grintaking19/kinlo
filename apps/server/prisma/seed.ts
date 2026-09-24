@@ -1,5 +1,5 @@
 import config from "../src/config/config.js";
-import { PrismaClient } from "../src/generated/prisma/client.ts";
+import { Post, PrismaClient, User } from "../src/generated/prisma/client.ts";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { faker } from "@faker-js/faker";
 
@@ -22,10 +22,13 @@ const MAX_POSTS_PER_USER = 10;
 const MAX_COMMENTS_PER_POST = 5;
 const REPLY_PROBABILITY = 0.3;
 
+type PickRandom = <T>(arr: T[], count: number) => T[];
+
 // Pick a random subset of an array
-function pickRandom(arr, count) {
-  return [...arr].sort(() => 0.5 - Math.random()).slice(0, count);
-}
+const pickRandom: PickRandom = (arr, count) => {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+};
 
 async function clearDatabase() {
   console.log("🧹Clearing database...");
@@ -53,6 +56,7 @@ async function seedUsers() {
       data: {
         clerkId: `user_${faker.string.alphanumeric(24)}`,
         email: faker.internet.email(),
+        username: faker.internet.username({ firstName: fullName.split(" ")[0], lastName: fullName.split(" ")[1] }),
         fullName: `${fullName}`,
         avatarUrl: faker.image.avatar(),
         bio: faker.helpers.maybe(() => faker.lorem.sentence(), {
@@ -69,7 +73,7 @@ async function seedUsers() {
           { probability: 0.5 },
         ),
         birthday: faker.helpers.maybe(
-          () => faker.date.birthdate({ min: 18, max: 65 }),
+          () => faker.date.birthdate(),
           { probability: 0.5 },
         ),
       },
@@ -79,12 +83,12 @@ async function seedUsers() {
   return users;
 }
 
-async function seedFollows(users) {
+async function seedFollows(users: User[]) {
   console.log(`👥 Seeding follows...`);
   const pairs = new Set();
   const data = [];
   for (const user of users) {
-    const condidates = users.filter((usr) => usr.id !== user.id);
+    const condidates = users.filter((usr: typeof users[0]) => usr.id !== user.id);
     const follows = pickRandom(condidates, NUM_FOLLOWS_PER_USER);
     for (const followee of follows) {
       const pairKey = `${user.id}-${followee.id}`;
@@ -101,7 +105,7 @@ async function seedFollows(users) {
   console.log(`👥 Seeded ${data.length} follows.`);
 }
 
-async function seedPosts(users) {
+async function seedPosts(users: User[]) {
   console.log(`📝 Seeding posts...`);
   const posts = [];
   for (const user of users) {
@@ -121,7 +125,7 @@ async function seedPosts(users) {
   return posts;
 }
 
-async function seedComments(posts, users) {
+async function seedComments(posts: Post[], users: User[]) {
   console.log(`💬 Seeding comments...`);
   let count = 0;
   for (const post of posts) {
