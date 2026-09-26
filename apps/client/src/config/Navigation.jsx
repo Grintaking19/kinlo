@@ -9,40 +9,42 @@ import {
   SquarePlay,
 } from "lucide-react";
 
+import { PATHS } from "../app/paths.js";
+
 export const sideNavItems = [
   {
     label: "Feed",
-    href: "/",
+    href: PATHS.FEED,
     icon: <Home />,
   },
   {
     label: "Messages",
-    href: "/messages",
+    href: PATHS.MESSAGES,
     icon: <MessageCircle />,
   },
   {
     label: "Notifications",
-    href: "/notifications",
+    href: PATHS.NOTIFICATIONS,
     icon: <Bell />,
   },
   {
     label: "Groups",
-    href: "/groups",
+    href: PATHS.GROUPS,
     icon: <Users />,
   },
   {
     label: "Discover",
-    href: "/discover",
+    href: PATHS.DISCOVER,
     icon: <Compass />,
   },
   {
     label: "Profile",
-    href: "/profile",
+    href: PATHS.PROFILE,
     icon: <User />,
   },
   {
     label: "Settings",
-    href: "/settings",
+    href: PATHS.SETTINGS,
     icon: <Settings />,
   },
 ];
@@ -50,17 +52,17 @@ export const sideNavItems = [
 export const topNavItems = [
   {
     label: "Feed",
-    href: "/",
+    href: PATHS.FEED,
     icon: <Home />,
   },
   {
     label: "Reels",
-    href: "/reels",
+    href: PATHS.REELS,
     icon: <SquarePlay />,
   },
   {
     label: "Groups",
-    href: "/groups",
+    href: PATHS.GROUPS,
     icon: <Users />,
   },
 ];
@@ -69,24 +71,21 @@ export const bottomMobileNavItems = [
   {
     label: "Home",
     icon: <Home />,
-    href: "/",
+    href: PATHS.FEED,
   },
   {
     label: "reels",
     icon: <SquarePlay />,
-    href: "/reels",
+    href: PATHS.REELS,
   },
   {
     label: "groups",
     icon: <Users />,
-    href: "/groups",
+    href: PATHS.GROUPS,
   },
   {
     label: "notifications",
     icon: <Bell />,
-    href: "/notifications",
+    href: PATHS.NOTIFICATIONS,
   },
 ];
-
-
-
