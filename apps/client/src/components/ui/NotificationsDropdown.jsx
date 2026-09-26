@@ -1,8 +1,8 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Bell } from "lucide-react";
-import IconButton from "../layout/IconButton.jsx";
+import IconButton from "../primitives/IconButton.jsx";
 
-const NotificationsDropdown = ({notifications = []}) => {
+const NotificationsDropdown = ({ notifications = [] }) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>

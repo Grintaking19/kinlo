@@ -1,5 +1,4 @@
-import SignInPage from "./features/auth/SignInPage"
-import "./App.css";
+import SignInPage from "../features/auth/SignInPage"
 
 function App() {
 

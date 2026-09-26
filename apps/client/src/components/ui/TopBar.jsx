@@ -1,10 +1,10 @@
-import InputField from "../layout/InputField.jsx";
-import IconButton from "../layout/IconButton.jsx";
-import NavItem from "../layout/NavItem.jsx";
+import InputField from "../primitives/InputField.jsx";
+import IconButton from "../primitives/IconButton.jsx";
+import NavItem from "../primitives/NavItem.jsx";
 import NotificationsDropdown from "./NotificationsDropdown.jsx";
 import AccountDropdown from "./AccountDropdown.jsx";
 import { Search, MessageSquare } from "lucide-react";
-import { topNavItems } from "../../config/Navigation.jsx";
+import { topNavItems } from "../../config/navigation.jsx";
 
 const TopBar = ({ currentPath = "/", className = "" }) => {
   return (

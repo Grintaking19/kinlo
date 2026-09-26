@@ -1,8 +1,8 @@
 import React from "react";
 import { RouterLink } from "../../lib/router.jsx";
-import NavItem from "../layout/NavItem";
-import Avatar from "../layout/Avatar";
-import {bottomMobileNavItems as navItems} from "../../config/Navigation.jsx";
+import NavItem from "../primitives/NavItem";
+import Avatar from "../primitives/Avatar";
+import { bottomMobileNavItems as navItems } from "../../config/navigation.jsx";
 
 const MobileBottomNavBar = ({ currentPath = "/" }) => {
   const id = React.useId();

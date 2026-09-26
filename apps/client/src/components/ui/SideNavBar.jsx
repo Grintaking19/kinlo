@@ -1,9 +1,9 @@
 import React from "react";
-import Logo from "../layout/Logo.jsx";
-import SideNavItem from "../layout/SideNavItem.jsx";
-import Button from "../layout/Button.jsx";
+import Logo from "../primitives/Logo.jsx";
+import SideNavItem from "../primitives/SideNavItem.jsx";
+import Button from "../primitives/Button.jsx";
 import UserRow from "../ui/UserRow.jsx";
-import { sideNavItems } from "../../config/Navigation.jsx";
+import { sideNavItems } from "../../config/navigation.jsx";
 import { Plus } from "lucide-react";
 
 const SideNavBar = ({ currentPath = "/" }) => {
