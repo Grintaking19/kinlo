@@ -1,4 +1,4 @@
-import { RouterLink } from "../../lib/router.jsx";
+import { RouterLink } from "../../lib/RouterLink.jsx";
 import LogoIcon from "../../assets/kinlo-logo.svg?react";
 const Logo = ({ className="" }) => {
   return (

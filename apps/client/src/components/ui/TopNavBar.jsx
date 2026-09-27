@@ -5,8 +5,10 @@ import NotificationsDropdown from "./NotificationsDropdown.jsx";
 import AccountDropdown from "./AccountDropdown.jsx";
 import { Search, MessageSquare } from "lucide-react";
 import { topNavItems } from "../../config/navigation.jsx";
+import { useLocation } from "react-router-dom";
 
-const TopNavBar = ({ currentPath = "/", className = "" }) => {
+const TopNavBar = ({ className = "" }) => {
+  const location = useLocation();
   return (
     <header
       className={`hidden  top-0  right-0 z-50 lg:flex flex-row items-center justify-between w-full py-3.5 px-8  bg-bg border-b border-border ${className}`}
@@ -27,7 +29,7 @@ const TopNavBar = ({ currentPath = "/", className = "" }) => {
             aria-label={item.label}
             href={item.href}
             icon={item.icon}
-            active={currentPath === item.href}
+            active={location.pathname === item.href}
           />
         ))}
       </nav>

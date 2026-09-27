@@ -7,9 +7,11 @@ import IconButton from "../primitives/IconButton.jsx";
 import { useState } from "react";
 import UserRow from "../ui/UserRow.jsx";
 import Logo from "../primitives/Logo.jsx";
+import {useLocation} from "react-router-dom";
 
-const MobileNavDrawer = ({ currentPath = "/" }) => {
+const MobileNavDrawer = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const location = useLocation();
   return (
     <Dialog.Root open={drawerOpen} onOpenChange={setDrawerOpen}>
       <Dialog.Trigger asChild>
@@ -33,7 +35,7 @@ const MobileNavDrawer = ({ currentPath = "/" }) => {
                   iconClassName="w-5 h-5"
                   label={item.label}
                   aria-label={item.label}
-                  active={currentPath === item.href}
+                  active={location.pathname === item.href}
                 />
               ))}
             </nav>

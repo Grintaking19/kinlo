@@ -5,9 +5,11 @@ import Button from "../primitives/Button.jsx";
 import UserRow from "../ui/UserRow.jsx";
 import { sideNavItems } from "../../config/navigation.jsx";
 import { Plus } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
-const SideNavBar = ({ currentPath = "/" }) => {
+const SideNavBar = () => {
   const id = React.useId();
+  const location = useLocation();
   return (
     <aside className="hidden lg:flex flex-col w-72 h-screen px-5 py-6 gap-1 justify-start items-start bg-bg border-r border-border">
       <Logo className="mb-10" />
@@ -20,7 +22,7 @@ const SideNavBar = ({ currentPath = "/" }) => {
             iconClassName="w-5 h-5"
             label={item.label}
             aria-label={item.label}
-            active={currentPath === item.href}
+            active={location.pathname === item.href}
           />
         ))}
       </nav>

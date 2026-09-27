@@ -1,5 +1,5 @@
 import styleIcon from "../../utils/styleIcon.jsx";
-import { RouterLink } from "../../lib/router.jsx";
+import { RouterLink } from "../../lib/RouterLink.jsx";
 
 const VARIANTS = {
   minimal: {

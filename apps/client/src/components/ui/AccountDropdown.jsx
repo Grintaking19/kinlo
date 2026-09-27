@@ -2,7 +2,7 @@ import React from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { User, Settings, LogOut, Moon, HelpCircle } from "lucide-react";
 import Avatar from "../primitives/Avatar.jsx";
-import { RouterLink } from "../../lib/router.jsx";
+import { RouterLink } from "../../lib/RouterLink.jsx";
 import ToggleButton from "../primitives/ToggleButton.jsx";
 
 const AccountDropdown = () => {

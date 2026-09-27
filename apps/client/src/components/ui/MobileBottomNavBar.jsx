@@ -1,10 +1,12 @@
 import React from "react";
-import { RouterLink } from "../../lib/router.jsx";
+import { RouterLink } from "../../lib/RouterLink.jsx";
 import NavItem from "../primitives/NavItem";
 import Avatar from "../primitives/Avatar";
 import { bottomMobileNavItems as navItems } from "../../config/navigation.jsx";
+import { useLocation } from "react-router-dom";
 
-const MobileBottomNavBar = ({ currentPath = "/" }) => {
+const MobileBottomNavBar = () => {
+  const location = useLocation();
   const id = React.useId();
   return (
     <nav className="lg:hidden fixed bottom-0 left-0 right-0 flex flex-row justify-between items-center px-2 pt-2.5 pb-3.5 bg-bg border-t border-border overflow-hidden z-50">
@@ -14,7 +16,7 @@ const MobileBottomNavBar = ({ currentPath = "/" }) => {
           size="lg"
           icon={item.icon}
           href={item.href}
-          active={currentPath === item.href}
+          active={location.pathname === item.href}
           aria-label={item.label}
           className="md:w-20 md:h-17" // Adjust for medium screens
         />
@@ -22,9 +24,9 @@ const MobileBottomNavBar = ({ currentPath = "/" }) => {
 
       <RouterLink
         href="/profile"
-        active={currentPath === "/profile"}
+        active={location.pathname === "/profile"}
         aria-label="Profile"
-        aria-current={"/profile" === currentPath ? "page" : undefined}
+        aria-current={"/profile" === location.pathname ? "page" : undefined}
         className={`flex items-center justify-center 
             w-16 h-13.5  
             md:w-20 md:h-17
@@ -35,7 +37,7 @@ const MobileBottomNavBar = ({ currentPath = "/" }) => {
       >
         <Avatar
           size="md"
-          wrapperClassName={`${currentPath === "/profile" ? "ring-2 ring-primary-500" : ""}`}
+          wrapperClassName={`${location.pathname === "/profile" ? "ring-2 ring-primary-500" : ""}`}
         />
       </RouterLink>
     </nav>
