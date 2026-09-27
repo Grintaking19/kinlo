@@ -6,7 +6,7 @@ import AccountDropdown from "./AccountDropdown.jsx";
 import { Search, MessageSquare } from "lucide-react";
 import { topNavItems } from "../../config/navigation.jsx";
 
-const TopBar = ({ currentPath = "/", className = "" }) => {
+const TopNavBar = ({ currentPath = "/", className = "" }) => {
   return (
     <header
       className={`hidden  top-0  right-0 z-50 lg:flex flex-row items-center justify-between w-full py-3.5 px-8  bg-bg border-b border-border ${className}`}
@@ -45,4 +45,4 @@ const TopBar = ({ currentPath = "/", className = "" }) => {
   );
 };
 
-export default TopBar;
+export default TopNavBar;
