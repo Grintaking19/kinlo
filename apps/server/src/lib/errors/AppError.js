@@ -42,12 +42,6 @@ class BadRequestError extends AppError {
   }
 }
 
-class UnauthenticatedError extends AppError {
-  constructor(message = "Unauthenticated access", statusCode = 407) {
-    super(message, statusCode);
-  }
-}
-
 class ConflictError extends AppError {
   constructor(message = "Conflict occurred", statusCode = 409) {
     super(message, statusCode);
@@ -73,7 +67,6 @@ export {
   UnauthorizedError,
   ForbiddenError,
   BadRequestError,
-  UnauthenticatedError,
   ConflictError,
   TooManyRequestsError,
   InternalServerError,
