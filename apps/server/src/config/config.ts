@@ -15,6 +15,9 @@ const envSchema = z.object({
   POSTGRES_USER: z.string(),
   POSTGRES_PASSWORD: z.string(),
   POSTGRES_DB: z.string(),
+  CLERK_PUBLISHABLE_KEY: z.string(),
+  CLERK_SECRET_KEY: z.string(),
+  NGROK_AUTH_TOKEN: z.string().optional(),
 });
 
 const env = envSchema.safeParse(process.env);
