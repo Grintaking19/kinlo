@@ -48,6 +48,12 @@ class ConflictError extends AppError {
   }
 }
 
+class UnprocessableEntityError extends AppError {
+  constructor(message = "Unprocessable entity", statusCode = 422) {
+    super(message, statusCode);
+  }
+}
+
 class TooManyRequestsError extends AppError {
   constructor(message = "Too many requests", statusCode = 429) {
     super(message, statusCode);
@@ -68,6 +74,7 @@ export {
   ForbiddenError,
   BadRequestError,
   ConflictError,
+  UnprocessableEntityError,
   TooManyRequestsError,
   InternalServerError,
 };
