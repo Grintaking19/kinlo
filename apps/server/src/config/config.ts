@@ -18,6 +18,7 @@ const envSchema = z.object({
   CLERK_PUBLISHABLE_KEY: z.string(),
   CLERK_SECRET_KEY: z.string(),
   NGROK_AUTH_TOKEN: z.string().optional(),
+  CLERK_WEBHOOK_SECRET: z.string(),
 });
 
 const env = envSchema.safeParse(process.env);
