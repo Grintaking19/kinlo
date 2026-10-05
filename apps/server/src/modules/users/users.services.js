@@ -13,6 +13,7 @@ export const createUser = async (data) => {
   const clerkId = id;
 
   if (!email) {
+    // console.error("Email is required to create a user");
     throw new UnprocessableEntityError("Email is required");
   }
 
@@ -22,6 +23,7 @@ export const createUser = async (data) => {
   });
 
   if (existingEmailUser) {
+    // console.error(`User with email ${email} already exists`);
     throw new ConflictError("User with this email already exists");
   }
 
@@ -29,6 +31,7 @@ export const createUser = async (data) => {
     where: { username },
   });
   if (existingUsernameUser) {
+    // console.error(`User with username ${username} already exists`);
     throw new ConflictError("User with this username already exists");
   }
 
@@ -43,6 +46,7 @@ export const createUser = async (data) => {
     });
     return newUser;
   } catch (error) {
+    // console.error(`Error creating user ${username}:`, error);
     throw new BadRequestError(
       `Failed to create user ${username} : ${error.message}`,
     );
@@ -56,14 +60,13 @@ export const updateUser = async (clerkId, updateData) => {
       where: { clerkId },
     });
   } catch (error) {
-    console.error(`Error fetching user ${clerkId}:`, error);
+    // console.error(`Error fetching user ${clerkId}:`, error);
     throw new BadRequestError(`Failed to fetch user: ${error.message}`);
   }
 
   if (!userExisting) {
-    throw new NotFoundError(
-      `User with username ${updateData.username}, not found`,
-    );
+    // console.error(`User with username ${updateData.username} not found`);
+    throw new NotFoundError(`User with This ID: ${clerkId} not found`);
   }
 
   try {
@@ -73,7 +76,7 @@ export const updateUser = async (clerkId, updateData) => {
     });
     return updatedUser;
   } catch (error) {
-    console.error(`Error updating user ${clerkId}:`, error);
+    // console.error(`Error updating user ${clerkId}:`, error);
     throw new BadRequestError(`Failed to update user: ${error.message}`);
   }
 };
@@ -99,7 +102,7 @@ export const deleteUser = async (clerkId) => {
     });
     return deletedUser;
   } catch (error) {
-    console.error(`Error deleting user ${clerkId}:`, error);
+    // console.error(`Error deleting user ${clerkId}:`, error);
     throw new BadRequestError(`Failed to delete user: ${error.message}`);
   }
 };
@@ -111,7 +114,7 @@ export const getUserByEmail = async (email) => {
       where: { email },
     });
   } catch (error) {
-    console.error(`Error fetching user by email ${email}:`, error);
+    // console.error(`Error fetching user by email ${email}:`, error);
     throw new BadRequestError(
       `Failed to fetch user by email: ${error.message}`,
     );

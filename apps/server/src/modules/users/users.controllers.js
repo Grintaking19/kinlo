@@ -34,11 +34,12 @@ export const clerkWebhookHandler = async (req, res, next) => {
     console.error("Webhook verification failed:");
     return next(new BadRequestError("Webhook verification failed"));
   }
-
+  // console.log("Received Clerk webhook event:", event);
   const { type, data } = event;
   try {
     switch (type) {
       case "user.created": {
+        // console.log(`Creating user with ID ${data.username}`);
         const newUser = await createUser(data);
         return res.status(201).json({
           status: "success",
@@ -47,6 +48,7 @@ export const clerkWebhookHandler = async (req, res, next) => {
         });
       }
       case "user.deleted": {
+        // console.log(`Deleting user with ID ${data.id}`);
         const deletedUser = await deleteUser(data.id);
         return res.status(200).json({
           status: "success",
@@ -55,6 +57,7 @@ export const clerkWebhookHandler = async (req, res, next) => {
         });
       }
       case "user.updated": {
+        // console.log(`Updating user with ID ${data.id}`);
         const updatedUser = await updateUser(data.id, data);
         return res.status(200).json({
           status: "success",
