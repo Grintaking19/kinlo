@@ -146,19 +146,19 @@ export const getUserByUsername = async (username) => {
   return user;
 };
 
-export const getUserById = async (id) => {
+export const getUserByClerkId = async (clerkId) => {
   let user;
   try {
     user = await prisma.user.findUnique({
-      where: { id },
+      where: { clerkId },
     });
   } catch (error) {
-    console.error(`Error fetching user by ID ${id}:`, error);
+    console.error(`Error fetching user by ID ${clerkId}:`, error);
     throw new BadRequestError(`Failed to fetch user by ID: ${error.message}`);
   }
 
   if (!user) {
-    throw new NotFoundError(`User with ID ${id} not found`);
+    throw new NotFoundError(`User with ID ${clerkId} not found`);
   }
 
   return user;

@@ -10,8 +10,7 @@ const app = express();
 app.use(cors());
 app.use("/api/webhooks",  userRoutes);
 app.use(express.json());
-
-// app.use(clerkMiddleware);
+app.use(clerkMiddleware());
 
 
 // Error handling middleware (Last middleware to be used)
