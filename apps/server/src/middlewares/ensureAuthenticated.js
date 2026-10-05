@@ -1,6 +1,6 @@
 import { getAuth } from "@clerk/express";
 import { UnauthorizedError } from "../lib/errors/AppError.js";
-import { getUserByClerkId } from "../modules/users/user.service.js";
+import { getUserByClerkId } from "../modules/users/users.services.js";
 
 async function ensureAuthenticated(req, res, next) {
   const { isAuthenticated, userId: clerkId } = getAuth(req);
