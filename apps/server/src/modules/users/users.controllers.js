@@ -1,7 +1,10 @@
 import config from "../../config/config.ts";
 import { Webhook } from "svix";
 import { createUser, updateUser, deleteUser } from "./users.services.js";
-import { BadRequestError, InternalServerError } from "../../lib/errors/AppError.js";
+import {
+  BadRequestError,
+  InternalServerError,
+} from "../../lib/errors/AppError.js";
 
 export const clerkWebhookHandler = async (req, res, next) => {
   if (!config.CLERK_WEBHOOK_SECRET) {
@@ -78,5 +81,11 @@ export const clerkWebhookHandler = async (req, res, next) => {
   }
 };
 
-
-
+export const getMeController = async (req, res) => {
+  const user = req.user; // This is set by the ensureAuthenticated middleware
+  console.log("Authenticated user:", user);
+  res.status(200).json({
+    status: "success",
+    user,
+  });
+};
