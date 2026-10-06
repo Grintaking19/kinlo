@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import userRoutes from "./modules/users/users.routes.js";
-import testUserRoutes from "./modules/users/users.test.routes.js";
+import testUserRoutes from "./modules/users/users.protected.routes.js";
 import { clerkMiddleware } from "@clerk/express";
 import errorHandler from "./middlewares/errorHandler.js";
 

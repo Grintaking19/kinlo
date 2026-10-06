@@ -6,6 +6,8 @@ import {
   InternalServerError,
 } from "../../lib/errors/AppError.js";
 
+import { consoleTest } from "../../lib/consoleTest.js";
+
 export const clerkWebhookHandler = async (req, res, next) => {
   if (!config.CLERK_WEBHOOK_SECRET) {
     console.error(
@@ -42,7 +44,7 @@ export const clerkWebhookHandler = async (req, res, next) => {
   try {
     switch (type) {
       case "user.created": {
-        console.log(`Creating user with ID ${data.username}`);
+        consoleTest(`Creating user with ID ${data.username}`);
         const newUser = await createUser(data);
         return res.status(201).json({
           status: "success",

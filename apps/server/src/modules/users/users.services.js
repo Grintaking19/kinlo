@@ -63,6 +63,7 @@ export const updateUser = async (clerkId, updateData) => {
     // console.error(`Error fetching user ${clerkId}:`, error);
     throw new BadRequestError(`Failed to fetch user: ${error.message}`);
   }
+  consoleTest(`Fetching user with ID ${clerkId}`);
 
   if (!userExisting) {
     // console.error(`User with username ${updateData.username} not found`);
