@@ -9,8 +9,15 @@ import {
 export const createUser = async (data) => {
   const { id, first_name, last_name, username, email_addresses } = data;
   const email = email_addresses[0]?.email_address || null;
-  const fullName = `${first_name} ${last_name}`.trim();
+  const fullName = `${first_name || ""} ${last_name || ""}`.trim();
   const clerkId = id;
+
+  if (!first_name || !last_name) {
+    // console.error("First name and last name are required to create a user");
+    throw new UnprocessableEntityError(
+      "First name and last name are required to create a user",
+    );
+  }
 
   if (!email) {
     // console.error("Email is required to create a user");
