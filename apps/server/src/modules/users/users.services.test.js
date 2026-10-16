@@ -129,15 +129,15 @@ describe("createUser", () => {
 
     expect(prisma.user.create).toHaveBeenCalledWith({
       data: {
-        email: payload.email_addresses[0].email_address,
-        fullName: `${payload.first_name} ${payload.last_name}`.trim(),
-        username: payload.username,
-        clerkId: payload.id,
+        email: "johndoe@example.com",
+        fullName: "John Doe",
+        username: "johndoe",
+        clerkId: "user_clerk_123",
       },
     });
   });
 
-  it("throws BadRequestError when there is an error during user creation", async () => {
+  it("throws InternalServerError when there is an error during user creation", async () => {
     // Simulate no existing user with the same email
     prisma.user.findUnique.mockResolvedValueOnce(null);
     // Simulate no existing user with the same username
@@ -193,13 +193,11 @@ describe("updateUser", () => {
 
   it("throws InternalServerError when there is an error during user find", async () => {
     // Simulate an error during user find
-    prisma.user.findUnique.mockRejectedValueOnce(
-      new Error("Database error"),
-    );
+    prisma.user.findUnique.mockRejectedValueOnce(new Error("Database error"));
 
-    await expect(updateUser("existing_clerk_id", { fullName: "New Name" })).rejects.toThrow(
-      InternalServerError,
-    );
+    await expect(
+      updateUser("existing_clerk_id", { fullName: "New Name" }),
+    ).rejects.toThrow(InternalServerError);
 
     expect(prisma.user.findUnique).toHaveBeenCalledWith({
       where: { clerkId: "existing_clerk_id" },
@@ -217,14 +215,10 @@ describe("updateUser", () => {
     prisma.user.update.mockRejectedValueOnce(
       new Error("Failed to update user: Database error"),
     );
-    const updateData = makeDBUser({
-      clerkId: "existing_clerk_id",
-      fullName: "New Name",
-    });
 
-    await expect(updateUser(updateData.clerkId, updateData)).rejects.toThrow(
-      InternalServerError,
-    );
+    await expect(
+      updateUser("existing_clerk_id", { fullName: "New Name" }),
+    ).rejects.toThrow(InternalServerError);
 
     expect(prisma.user.findUnique).toHaveBeenCalledWith({
       where: { clerkId: "existing_clerk_id" },
@@ -232,7 +226,9 @@ describe("updateUser", () => {
 
     expect(prisma.user.update).toHaveBeenCalledWith({
       where: { clerkId: "existing_clerk_id" },
-      data: updateData,
+      data: {
+        fullName: "New Name",
+      },
     });
   });
 });
