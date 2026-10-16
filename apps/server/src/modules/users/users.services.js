@@ -1,15 +1,16 @@
 import prisma from "../../lib/prisma.js";
+import { consoleTest } from "../../lib/consoleTest.js";
 import {
   UnprocessableEntityError,
-  BadRequestError,
   ConflictError,
   NotFoundError,
+  InternalServerError,
 } from "../../lib/errors/AppError.js";
 
 export const createUser = async (data) => {
   const { id, first_name, last_name, username, email_addresses } = data;
   const email = email_addresses[0]?.email_address || null;
-  const fullName = `${first_name || ""} ${last_name || ""}`.trim();
+  const fullName = `${first_name} ${last_name}`.trim();
   const clerkId = id;
 
   if (!first_name || !last_name) {
@@ -54,7 +55,7 @@ export const createUser = async (data) => {
     return newUser;
   } catch (error) {
     // console.error(`Error creating user ${username}:`, error);
-    throw new BadRequestError(
+    throw new InternalServerError(
       `Failed to create user ${username} : ${error.message}`,
     );
   }
@@ -68,7 +69,7 @@ export const updateUser = async (clerkId, updateData) => {
     });
   } catch (error) {
     // console.error(`Error fetching user ${clerkId}:`, error);
-    throw new BadRequestError(`Failed to fetch user: ${error.message}`);
+    throw new InternalServerError(`Failed to fetch user: ${error.message}`);
   }
   consoleTest(`Fetching user with ID ${clerkId}`);
 
@@ -85,7 +86,7 @@ export const updateUser = async (clerkId, updateData) => {
     return updatedUser;
   } catch (error) {
     // console.error(`Error updating user ${clerkId}:`, error);
-    throw new BadRequestError(`Failed to update user: ${error.message}`);
+    throw new InternalServerError(`Failed to update user: ${error.message}`);
   }
 };
 
@@ -97,7 +98,7 @@ export const deleteUser = async (clerkId) => {
     });
   } catch (error) {
     console.error(`Error fetching user ${clerkId}:`, error);
-    throw new BadRequestError(`Failed to fetch user: ${error.message}`);
+    throw new InternalServerError(`Failed to fetch user: ${error.message}`);
   }
 
   if (!userExisting) {
@@ -111,7 +112,7 @@ export const deleteUser = async (clerkId) => {
     return deletedUser;
   } catch (error) {
     // console.error(`Error deleting user ${clerkId}:`, error);
-    throw new BadRequestError(`Failed to delete user: ${error.message}`);
+    throw new InternalServerError(`Failed to delete user: ${error.message}`);
   }
 };
 
@@ -123,7 +124,7 @@ export const getUserByEmail = async (email) => {
     });
   } catch (error) {
     // console.error(`Error fetching user by email ${email}:`, error);
-    throw new BadRequestError(
+    throw new InternalServerError(
       `Failed to fetch user by email: ${error.message}`,
     );
   }
@@ -142,7 +143,7 @@ export const getUserByUsername = async (username) => {
     });
   } catch (error) {
     console.error(`Error fetching user by username ${username}:`, error);
-    throw new BadRequestError(
+    throw new InternalServerError(
       `Failed to fetch user by username: ${error.message}`,
     );
   }
@@ -162,7 +163,9 @@ export const getUserByClerkId = async (clerkId) => {
     });
   } catch (error) {
     console.error(`Error fetching user by ID ${clerkId}:`, error);
-    throw new BadRequestError(`Failed to fetch user by ID: ${error.message}`);
+    throw new InternalServerError(
+      `Failed to fetch user by ID: ${error.message}`,
+    );
   }
 
   if (!user) {

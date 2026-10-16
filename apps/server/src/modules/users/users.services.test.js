@@ -14,7 +14,7 @@ vi.mock("../../lib/prisma.ts", () => ({
 import prisma from "../../lib/prisma.ts";
 import { createUser, updateUser, deleteUser } from "./users.services.js";
 import {
-  BadRequestError,
+  InternalServerError,
   ConflictError,
   NotFoundError,
   UnprocessableEntityError,
@@ -29,6 +29,18 @@ const makeClerkPayload = (overrides = {}) => ({
   email_addresses: [{ email_address: "johndoe@example.com" }],
   ...overrides,
 });
+
+const makeDBUser = (overrides = {}) => ({
+  clerkId: "user_clerk_123",
+  fullName: "John Doe",
+  username: "johndoe",
+  email: "johndoe@example.com",
+  ...overrides,
+});
+
+/**
+ * Tests for the createUser function
+ */
 
 describe("createUser", () => {
   // Test cases for UnprocessableEntityError when required fields are missing or invalid
@@ -122,6 +134,105 @@ describe("createUser", () => {
         username: payload.username,
         clerkId: payload.id,
       },
+    });
+  });
+
+  it("throws BadRequestError when there is an error during user creation", async () => {
+    // Simulate no existing user with the same email
+    prisma.user.findUnique.mockResolvedValueOnce(null);
+    // Simulate no existing user with the same username
+    prisma.user.findUnique.mockResolvedValueOnce(null);
+    // Simulate an error during user creation
+    prisma.user.create.mockRejectedValueOnce(
+      new Error("Database error during user creation"),
+    );
+    const payload = makeClerkPayload();
+    await expect(createUser(payload)).rejects.toThrow(InternalServerError);
+  });
+});
+
+/**
+ * Tests for the updateUser function
+ */
+
+describe("updateUser", () => {
+  it("throws NotFoundError when the user does not exist", async () => {
+    prisma.user.findUnique.mockResolvedValueOnce(null); // Simulate user not found
+
+    await expect(
+      updateUser("non_existent_clerk_id", { fullName: "NewName" }),
+    ).rejects.toThrow(NotFoundError);
+
+    expect(prisma.user.findUnique).toHaveBeenCalledWith({
+      where: { clerkId: "non_existent_clerk_id" },
+    });
+    expect(prisma.user.update).not.toHaveBeenCalled();
+  });
+
+  it("updates the user when the user exists", async () => {
+    const existingUser = makeDBUser({ clerkId: "existing_clerk_id" });
+    const updateData = { fullName: "New Name" };
+    const updatedUser = { ...existingUser, ...updateData };
+
+    prisma.user.findUnique.mockResolvedValueOnce(existingUser); // Simulate user found
+    prisma.user.update.mockResolvedValueOnce(updatedUser); // Simulate successful update
+
+    await expect(updateUser("existing_clerk_id", updateData)).resolves.toEqual(
+      updatedUser,
+    );
+
+    expect(prisma.user.findUnique).toHaveBeenCalledWith({
+      where: { clerkId: "existing_clerk_id" },
+    });
+
+    expect(prisma.user.update).toHaveBeenCalledWith({
+      where: { clerkId: "existing_clerk_id" },
+      data: updateData,
+    });
+  });
+
+  it("throws InternalServerError when there is an error during user find", async () => {
+    // Simulate an error during user find
+    prisma.user.findUnique.mockRejectedValueOnce(
+      new Error("Database error"),
+    );
+
+    await expect(updateUser("existing_clerk_id", { fullName: "New Name" })).rejects.toThrow(
+      InternalServerError,
+    );
+
+    expect(prisma.user.findUnique).toHaveBeenCalledWith({
+      where: { clerkId: "existing_clerk_id" },
+    });
+
+    expect(prisma.user.update).not.toHaveBeenCalled();
+  });
+
+  it("throws InternalServerError when there is an error during user update", async () => {
+    const existingUser = makeDBUser({ clerkId: "existing_clerk_id" });
+    // Simulate user found
+    prisma.user.findUnique.mockResolvedValueOnce(existingUser);
+
+    // Simulate an error during user update
+    prisma.user.update.mockRejectedValueOnce(
+      new Error("Failed to update user: Database error"),
+    );
+    const updateData = makeDBUser({
+      clerkId: "existing_clerk_id",
+      fullName: "New Name",
+    });
+
+    await expect(updateUser(updateData.clerkId, updateData)).rejects.toThrow(
+      InternalServerError,
+    );
+
+    expect(prisma.user.findUnique).toHaveBeenCalledWith({
+      where: { clerkId: "existing_clerk_id" },
+    });
+
+    expect(prisma.user.update).toHaveBeenCalledWith({
+      where: { clerkId: "existing_clerk_id" },
+      data: updateData,
     });
   });
 });
