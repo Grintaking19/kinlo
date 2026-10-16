@@ -19,9 +19,9 @@ export const createUser = async (data) => {
     );
   }
 
-  if (!email) {
+  if (!email || email.trim() === "" || !username || username.trim() === "") {
     // console.error("Email is required to create a user");
-    throw new UnprocessableEntityError("Email is required");
+    throw new UnprocessableEntityError("Email and username are required");
   }
 
   // Check if the user already exists in the database
