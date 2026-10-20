@@ -12,6 +12,7 @@ const ICONS_SIZES = {
   lg: "w-7 h-7", // BottomBar NavItem (Mobile)
 };
 
+
 const VARIANTS = {
   pill: {
     active: "bg-surface-3 text-primary",
@@ -25,6 +26,10 @@ const VARIANTS = {
     active: "text-primary-400",
     inactive: "text-text hover:bg-surface-2",
   },
+  text: {
+    active: "text-primary-400",
+    inactive: "text-text-secondary hover:text-text",
+  }
 };
 
 const NavItem = ({
@@ -35,6 +40,7 @@ const NavItem = ({
   active = false,
   variant = "minimal",
   "aria-label": ariaLabel,
+  children,
   ...props
 }) => {
   /**
@@ -64,12 +70,12 @@ const NavItem = ({
     );
   }
 
-  const sizeClass = size ? SIZES[size] : SIZES.sm;
+  const sizeClass = icon ? size ? SIZES[size] : SIZES.sm : "";
   const iconSizeClass = size ? ICONS_SIZES[size] : ICONS_SIZES.sm;
   const variantClass = variant ? VARIANTS[variant] : VARIANTS.pill;
   const stateClass = active ? variantClass.active : variantClass.inactive;
 
-  const styledIcon = styleIcon(icon, iconSizeClass);
+  const styledIcon = icon ? styleIcon(icon, iconSizeClass) : null;
 
   return (
     <RouterLink
@@ -85,6 +91,7 @@ const NavItem = ({
       aria-label={ariaLabel}
     >
       {styledIcon}
+      {children}
     </RouterLink>
   );
 };

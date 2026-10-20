@@ -19,7 +19,7 @@ const VARIANTS = {
   secondary: "text-text bg-surface-2/97 hover:bg-surface-2 ",
   outline:
     "text-text bg-transparent border border-border hover:bg-surface-2 hover:border-border-strong",
-  ghost: "bg-transparent",
+  ghost: "bg-transparent text-text hover:bg-surface-2 hover:border-border-strong",
   danger:
     "text-red-500 border border-red-500 border-2  bg-transparent hover:bg-red-500/30 ",
 };
@@ -35,7 +35,7 @@ const Button = ({
   href,
   variant = "primary",
   size = "md",
-  gradient = "cta",
+  gradient = null,
   icon = null,
   className = "",
   disabled = false,
@@ -83,11 +83,11 @@ const Button = ({
     );
   }
 
-  if (import.meta.env.DEV && ["Button", RouterLink].includes(Component)) {
-    console.error(
-      `Button: \`as\` prop must be either "button" or "${RouterLink}". Received: ${Component}`,
-    );
-  }
+  // if (import.meta.env.DEV && ["Button", RouterLink].includes(Component)) {
+  //   console.error(
+  //     `Button: \`as\` prop must be either "button" or "${RouterLink}". Received: ${Component}`,
+  //   );
+  // }
 
   // Handle NULL values for variant, gradients and size.
   const variantClass = variant ? VARIANTS[variant] : "";
@@ -95,7 +95,7 @@ const Button = ({
     variant === "primary" ? GRADIENTS[gradient] || GRADIENTS["cta"] : "";
   const sizeClass = size ? SIZES[size] : "";
 
-  const styledIcon = styleIcon(icon, "w-4.5 h-4.5");
+  const styledIcon = icon ? styleIcon(icon, "w-4.5 h-4.5") : null;
 
   return (
     <Component

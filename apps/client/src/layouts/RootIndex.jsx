@@ -1,12 +1,12 @@
-
-
-
+import { useAuth } from "@clerk/react";
+import { Navigate } from "react-router-dom";
+import LoadingPage from "../components/ui/LoadingPage.jsx";
+import LandingPage from "../features/landing/LandingPage.jsx";
 const RootIndex = () => {
-  return (
-    <div>
-      <h1>Welcome to the Root Index</h1>
-    </div>
-  )
-}
+  const { isLoaded, isSignedIn } = useAuth();
+  if (!isLoaded) return <LoadingPage />;
+  if (!isSignedIn) return <LandingPage />;
+  return <Navigate to="/feed" replace />;
+};
 
-export default RootIndex
+export default RootIndex;

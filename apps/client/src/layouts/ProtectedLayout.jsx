@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import LoadingPage from "../components/ui/LoadingPage.jsx";
 
 // The role of this layout is to authenticate the user and provide a common layout for all authenticated routes.

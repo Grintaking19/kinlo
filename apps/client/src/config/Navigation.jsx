@@ -89,3 +89,18 @@ export const bottomMobileNavItems = [
     href: PATHS.NOTIFICATIONS,
   },
 ];
+
+export const landingPageNavItems = [
+  {
+    label: "Features",
+    href: PATHS.Features,
+  },
+  {
+    label: "Community",
+    href: PATHS.Community,
+  },
+  {
+    label: "About",
+    href: PATHS.About,
+  },
+];

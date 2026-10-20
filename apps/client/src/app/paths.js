@@ -3,7 +3,7 @@ export const PATHS = {
   SIGN_UP: "/sign-up",
   MESSAGES: "/messages",
   ROOT: "/", // This is the root path of the application, renders RootIndex component, where it will determine if it will render the Feed page or the Landing page based on if the user is authenticated or not.
-  FEED: "/",
+  FEED: "/feed",
   NOTIFICATIONS: "/notifications",
   GROUPS: "/groups",
   DISCOVER: "/discover",
@@ -14,6 +14,9 @@ export const PATHS = {
   REELS: "/reels",
   PROFILE: "/profile",
   SETTINGS: "/settings",
+  Features: "#features",
+  Community: "#community",
+  About: "#about",
   NOT_FOUND: "/not-found",
 };
 

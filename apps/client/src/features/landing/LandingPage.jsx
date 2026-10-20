@@ -1,8 +1,10 @@
-
+import LandingPageNavBar from "./LandingPageNavBar.jsx";
 const LandingPage = () => {
   return (
-    <div>LandingPage</div>
-  )
-}
+    <>
+      <LandingPageNavBar />
+    </>
+  );
+};
 
-export default LandingPage
+export default LandingPage;
