@@ -1,9 +1,13 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
 
 let errorSpy;
 
+beforeEach(() => {
+  errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+});
+
 afterEach(() => {
-  errorSpy?.mockRestore();
+  errorSpy.mockRestore();
   errorSpy = undefined;
 });
 
@@ -19,7 +23,14 @@ vi.mock("../../lib/prisma.ts", () => ({
 }));
 
 import prisma from "../../lib/prisma.ts";
-import { createUser, updateUser, deleteUser } from "./users.services.js";
+import {
+  createUser,
+  updateUser,
+  deleteUser,
+  getUserByClerkId,
+  getUserByEmail,
+  getUserByUsername,
+} from "./users.services.js";
 import {
   InternalServerError,
   ConflictError,
@@ -70,7 +81,6 @@ describe("createUser", () => {
   ])(
     "throws UnprocessableEntityError when the user has $description",
     async ({ overrides }) => {
-      errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
       // Arrange
       const payload = makeClerkPayload(overrides);
 
@@ -85,7 +95,6 @@ describe("createUser", () => {
   );
 
   it("throws ConflictError when a user with the same email already exists", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     prisma.user.findUnique.mockResolvedValueOnce({ id: "existing_user_id" }); // Simulate existing user
 
     const payload = makeClerkPayload();
@@ -99,7 +108,6 @@ describe("createUser", () => {
   });
 
   it("throws ConflictError when a user with the same username already exists", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     // Simulate no existing user with the same email
     prisma.user.findUnique.mockResolvedValueOnce(null);
     // Simulate existing user with the same username
@@ -148,7 +156,6 @@ describe("createUser", () => {
   });
 
   it("throws InternalServerError when there is an error during user creation", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     // Simulate no existing user with the same email
     prisma.user.findUnique.mockResolvedValueOnce(null);
     // Simulate no existing user with the same username
@@ -168,7 +175,6 @@ describe("createUser", () => {
 
 describe("updateUser", () => {
   it("throws NotFoundError when the user does not exist", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     prisma.user.findUnique.mockResolvedValueOnce(null); // Simulate user not found
 
     await expect(
@@ -204,7 +210,6 @@ describe("updateUser", () => {
   });
 
   it("throws InternalServerError when there is an error during user find", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     // Simulate an error during user find
     prisma.user.findUnique.mockRejectedValueOnce(new Error("Database error"));
 
@@ -220,7 +225,6 @@ describe("updateUser", () => {
   });
 
   it("throws InternalServerError when there is an error during user update", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const existingUser = makeDBUser({ clerkId: "existing_clerk_id" });
     // Simulate user found
     prisma.user.findUnique.mockResolvedValueOnce(existingUser);
@@ -253,7 +257,6 @@ describe("updateUser", () => {
 
 describe("deleteUser", () => {
   it("throws NotFoundError when the user does not exist", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     prisma.user.findUnique.mockResolvedValueOnce(null); // Simulate user not found
     await expect(deleteUser("non_existent_clerk_id")).rejects.toThrow(
       NotFoundError,
@@ -284,7 +287,6 @@ describe("deleteUser", () => {
   });
 
   it("throws InternalServerError when there is an error during user find", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     // Simulate an error during user find
     prisma.user.findUnique.mockRejectedValueOnce(new Error("Database error"));
     await expect(deleteUser("existing_clerk_id")).rejects.toThrow(
@@ -297,7 +299,6 @@ describe("deleteUser", () => {
   });
 
   it("throws InternalServerError when there is an error during user delete", async () => {
-    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const existingUser = makeDBUser({ clerkId: "existing_clerk_id" });
     // Simulate user found
     prisma.user.findUnique.mockResolvedValueOnce(existingUser);
@@ -313,6 +314,39 @@ describe("deleteUser", () => {
     });
     expect(prisma.user.delete).toHaveBeenCalledWith({
       where: { clerkId: "existing_clerk_id" },
+    });
+  });
+});
+
+describe.each([
+  ["ClerkId", "clerkId", getUserByClerkId, "clerk_abc"],
+  ["Email", "email", getUserByEmail, "a@b.com"],
+  ["Username", "username", getUserByUsername, "username123"],
+])("getUserBy%s", (label, dbName, serviceFunc, testValue) => {
+  it(`returns the user when the user with ${label} exists`, async () => {
+    const mockUser = makeDBUser({ [dbName]: testValue });
+    prisma.user.findUnique.mockResolvedValueOnce(mockUser); // Simulate user found
+    const result = await serviceFunc(testValue);
+    expect(result).toBe(mockUser);
+    expect(prisma.user.findUnique).toHaveBeenCalledWith({
+      where: { [dbName]: testValue },
+    });
+  });
+
+  it(`throws NotFoundError when the user with ${label} does not exist`, async () => {
+    prisma.user.findUnique.mockResolvedValueOnce(null); // Simulate user not found
+    await expect(serviceFunc(testValue)).rejects.toThrow(NotFoundError);
+    expect(prisma.user.findUnique).toHaveBeenCalledWith({
+      where: { [dbName]: testValue },
+    });
+  });
+
+  it(`throws InternalServerError when there is an error during user find by ${label}`, async () => {
+    // Simulate an error during user find
+    prisma.user.findUnique.mockRejectedValueOnce(new Error("Database error"));
+    await expect(serviceFunc(testValue)).rejects.toThrow(InternalServerError);
+    expect(prisma.user.findUnique).toHaveBeenCalledWith({
+      where: { [dbName]: testValue },
     });
   });
 });
