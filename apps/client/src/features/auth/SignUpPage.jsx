@@ -3,7 +3,7 @@ import { SignUp } from "@clerk/react";
 const SignUpPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <SignUp />
+      <SignUp routing="path" path="/sign-up" signInUrl="/sign-in" />
     </div>
   );
 };
