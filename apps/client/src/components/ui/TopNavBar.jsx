@@ -4,7 +4,7 @@ import NavItem from "../primitives/NavItem.jsx";
 import NotificationsDropdown from "./NotificationsDropdown.jsx";
 import AccountDropdown from "./AccountDropdown.jsx";
 import { Search, MessageSquare } from "lucide-react";
-import { topNavItems } from "../../config/navigation.jsx";
+import { topNavItems } from "../../config/Navigation.jsx";
 import { useLocation } from "react-router-dom";
 
 const TopNavBar = ({ className = "" }) => {

@@ -2,7 +2,7 @@ import React from "react";
 import { RouterLink } from "../../lib/RouterLink.jsx";
 import NavItem from "../primitives/NavItem";
 import Avatar from "../primitives/Avatar";
-import { bottomMobileNavItems as navItems } from "../../config/navigation.jsx";
+import { bottomMobileNavItems as navItems } from "../../config/Navigation.jsx";
 import { useLocation } from "react-router-dom";
 
 const MobileBottomNavBar = () => {

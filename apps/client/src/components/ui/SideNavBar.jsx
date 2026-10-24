@@ -3,7 +3,7 @@ import Logo from "../primitives/Logo.jsx";
 import SideNavItem from "../primitives/SideNavItem.jsx";
 import Button from "../primitives/Button.jsx";
 import UserRow from "../ui/UserRow.jsx";
-import { sideNavItems } from "../../config/navigation.jsx";
+import { sideNavItems } from "../../config/Navigation.jsx";
 import { Plus } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
