@@ -2,7 +2,10 @@ import Avatar from "../primitives/Avatar.jsx";
 import IconButton from "../primitives/IconButton.jsx";
 // import LogoutIcon from "../../assets/icons/logout-icon.svg?react";
 import { LogOut } from "lucide-react";
+import { useClerk } from "@clerk/react";
+import { PATHS } from "../../app/paths.js";
 const UserRow = ({ fullName = "John Doe", username = "john_doe" }) => {
+  const { signOut } = useClerk();
   return (
     <div className="flex flex-row gap-3 items-center justify-between w-full">
       <Avatar size="md" />
@@ -10,7 +13,12 @@ const UserRow = ({ fullName = "John Doe", username = "john_doe" }) => {
         <p className="font-semibold text-text truncate">{fullName}</p>
         <p className="text-text-secondary truncate">{username}</p>
       </div>
-      <IconButton icon={<LogOut />} size="lg" aria-label="Logout" />
+      <IconButton
+        icon={<LogOut />}
+        size="lg"
+        aria-label="Logout"
+        onClick={() => signOut({ redirectUrl: PATHS.ROOT })}
+      />
     </div>
   );
 };

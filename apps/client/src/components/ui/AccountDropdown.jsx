@@ -4,9 +4,12 @@ import { User, Settings, LogOut, Moon, HelpCircle } from "lucide-react";
 import Avatar from "../primitives/Avatar.jsx";
 import { RouterLink } from "../../lib/RouterLink.jsx";
 import ToggleButton from "../primitives/ToggleButton.jsx";
+import { useClerk } from "@clerk/react";
+import {PATHS} from "../../app/paths.js";
 
 const AccountDropdown = () => {
   const [darkMode, setDarkMode] = React.useState(true);
+  const { signOut } = useClerk();
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
@@ -79,7 +82,7 @@ const AccountDropdown = () => {
           <DropdownMenu.Separator className="my-1 h-px bg-border" />
           <DropdownMenu.Item
             onSelect={() => {
-              /* logout handler — wire up once Clerk lands (Day 5) */
+              signOut({ redirectUrl: PATHS.ROOT });
             }}
             className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-red-500 hover:bg-surface-2 outline-none data-[highlighted]:bg-surface-2 cursor-pointer"
           >
