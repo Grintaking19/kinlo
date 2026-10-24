@@ -19,7 +19,8 @@ const VARIANTS = {
   secondary: "text-text bg-surface-2/97 hover:bg-surface-2 ",
   outline:
     "text-text bg-transparent border border-border hover:bg-surface-2 hover:border-border-strong",
-  ghost: "bg-transparent text-text hover:bg-surface-2 hover:border-border-strong",
+  ghost:
+    "bg-transparent text-text hover:bg-surface-2 hover:border-border-strong",
   danger:
     "text-red-500 border border-red-500 border-2  bg-transparent hover:bg-red-500/30 ",
 };
@@ -79,7 +80,7 @@ const Button = ({
 
   if (import.meta.env.DEV && Component === RouterLink && !href) {
     console.error(
-      `Button: \`href\` is required when using the \`as='${RouterLink}'\` prop. This button will not function as a link without an \`href\`.`,
+      `Button: \`href\` is required when the \`as\` prop is set to a link component (like RouterLink). This button will not function as a link without an \`href\`.`,
     );
   }
 

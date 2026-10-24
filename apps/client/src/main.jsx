@@ -3,12 +3,12 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./app/App.jsx";
 import { ClerkProvider } from "@clerk/react";
-// import { dark } from "@clerk/ui/themes";
+// import { dark } from "@clerk/themes";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 // const clerkAppearance = {
-//   theme: dark,
+//   baseTheme: dark,
 //   variables: {
 //     colorPrimary: "#8B5CF6",
 //     colorBackground: "#17171C",
