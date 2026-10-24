@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  verify:
+    name: Lint, Test, and Build
     runs-on: ubuntu-latest
 
     steps:
