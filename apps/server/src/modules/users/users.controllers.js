@@ -35,8 +35,8 @@ export const clerkWebhookHandler = async (req, res, next) => {
       "svix-signature": svix_signature,
     });
     event = JSON.parse(req.body.toString(), "utf-8");
-  } catch (err) {
-    console.error("Webhook verification failed:");
+  } catch {
+    // console.error("Webhook verification failed:");
     return next(new BadRequestError("Webhook verification failed"));
   }
   // console.log("Received Clerk webhook event:", event);

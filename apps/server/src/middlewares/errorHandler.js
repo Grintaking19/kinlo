@@ -1,6 +1,6 @@
 import config from "../config/config.ts";
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, _next) => {
   // Set default values for statusCode and status if they are not already set
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";

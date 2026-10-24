@@ -9,6 +9,7 @@
     "seed": "prisma db seed",
     "build": "tsc",
     "start": "node dist/server.js",
+    "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -25,11 +26,13 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@faker-js/faker": "^10.5.0",
     "@ngrok/ngrok": "^1.7.0",
     "@prisma/adapter-pg": "^7.9.1",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.2",
+    "globals": "^17.13.0",
     "nodemon": "^3.1.14",
     "pg": "^8.22.0",
     "prisma": "^7.9.0",

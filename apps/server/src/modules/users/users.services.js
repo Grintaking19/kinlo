@@ -1,5 +1,4 @@
 import prisma from "../../lib/prisma.js";
-import { consoleTest } from "../../lib/consoleTest.js";
 import {
   UnprocessableEntityError,
   ConflictError,
@@ -71,7 +70,6 @@ export const updateUser = async (clerkId, updateData) => {
     // console.error(`Error fetching user ${clerkId}:`, error);
     throw new InternalServerError(`Failed to fetch user: ${error.message}`);
   }
-  consoleTest(`Fetching user with ID ${clerkId}`);
 
   if (!userExisting) {
     // console.error(`User with username ${updateData.username} not found`);

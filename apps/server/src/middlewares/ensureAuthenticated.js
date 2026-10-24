@@ -4,6 +4,7 @@ import { getUserByClerkId } from "../modules/users/users.services.js";
 
 async function ensureAuthenticated(req, res, next) {
   const { isAuthenticated, userId: clerkId } = getAuth(req);
+  // console.log("ensureAuthenticated middleware: isAuthenticated =", isAuthenticated, ", clerkId =", clerkId);
 
   if (!isAuthenticated || !clerkId) {
     return next(
