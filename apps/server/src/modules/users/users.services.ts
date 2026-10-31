@@ -6,27 +6,18 @@ import {
   InternalServerError,
 } from "../../lib/errors/AppError.js";
 
-export const createUser = async (data) => {
-  const { id, first_name, last_name, username, email_addresses } = data;
-  const email = email_addresses[0]?.email_address || null;
-  const fullName = `${first_name} ${last_name}`.trim();
-  const clerkId = id;
+import type {
+  CreateUserPayloadData,
+  UpdateUserPayloadData,
+  DeleteUserPayloadData,
+} from "./users.types.js";
+import { toUserCreateInput, toUserUpdateData } from "./users.types.js";
 
-  if (!first_name || !last_name) {
-    // console.error("First name and last name are required to create a user");
-    throw new UnprocessableEntityError(
-      "First name and last name are required to create a user",
-    );
-  }
-
-  if (!email || email.trim() === "" || !username || username.trim() === "") {
-    // console.error("Email is required to create a user");
-    throw new UnprocessableEntityError("Email and username are required");
-  }
-
+export const createUser = async (data: CreateUserPayloadData) => {
+  const userCreateInput = toUserCreateInput(data);
   // Check if the user already exists in the database
   const existingEmailUser = await prisma.user.findUnique({
-    where: { email },
+    where: { email: userCreateInput.email },
   });
 
   if (existingEmailUser) {
@@ -35,7 +26,7 @@ export const createUser = async (data) => {
   }
 
   const existingUsernameUser = await prisma.user.findUnique({
-    where: { username },
+    where: { username: userCreateInput.username },
   });
   if (existingUsernameUser) {
     // console.error(`User with username ${username} already exists`);
@@ -45,28 +36,27 @@ export const createUser = async (data) => {
   try {
     const newUser = await prisma.user.create({
       data: {
-        email,
-        username,
-        fullName,
-        clerkId,
+        ...userCreateInput,
       },
     });
     return newUser;
-  } catch (error) {
+  } catch (error: any) {
     // console.error(`Error creating user ${username}:`, error);
     throw new InternalServerError(
-      `Failed to create user ${username} : ${error.message}`,
+      `Failed to create user ${userCreateInput.username} : ${error.message}`,
     );
   }
 };
 
-export const updateUser = async (clerkId, updateData) => {
+export const updateUser = async (updateData: UpdateUserPayloadData) => {
+  const userUpdateData = toUserUpdateData(updateData);
+  const clerkId = updateData.data.id;
   let userExisting;
   try {
     userExisting = await prisma.user.findUnique({
-      where: { clerkId },
+      where: { clerkId: clerkId },
     });
-  } catch (error) {
+  } catch (error: any) {
     // console.error(`Error fetching user ${clerkId}:`, error);
     throw new InternalServerError(`Failed to fetch user: ${error.message}`);
   }
@@ -82,19 +72,20 @@ export const updateUser = async (clerkId, updateData) => {
       data: updateData,
     });
     return updatedUser;
-  } catch (error) {
+  } catch (error: any) {
     // console.error(`Error updating user ${clerkId}:`, error);
     throw new InternalServerError(`Failed to update user: ${error.message}`);
   }
 };
 
-export const deleteUser = async (clerkId) => {
+export const deleteUser = async (data: DeleteUserPayloadData) => {
+  const clerkId = data.data.id;
   let userExisting;
   try {
     userExisting = await prisma.user.findUnique({
       where: { clerkId },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error fetching user ${clerkId}:`, error);
     throw new InternalServerError(`Failed to fetch user: ${error.message}`);
   }
@@ -108,19 +99,19 @@ export const deleteUser = async (clerkId) => {
       where: { clerkId },
     });
     return deletedUser;
-  } catch (error) {
+  } catch (error: any) {
     // console.error(`Error deleting user ${clerkId}:`, error);
     throw new InternalServerError(`Failed to delete user: ${error.message}`);
   }
 };
 
-export const getUserByEmail = async (email) => {
+export const getUserByEmail = async (email: string) => {
   let user;
   try {
     user = await prisma.user.findUnique({
       where: { email },
     });
-  } catch (error) {
+  } catch (error: any) {
     // console.error(`Error fetching user by email ${email}:`, error);
     throw new InternalServerError(
       `Failed to fetch user by email: ${error.message}`,
@@ -133,13 +124,13 @@ export const getUserByEmail = async (email) => {
   return user;
 };
 
-export const getUserByUsername = async (username) => {
+export const getUserByUsername = async (username: string) => {
   let user;
   try {
     user = await prisma.user.findUnique({
       where: { username },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error fetching user by username ${username}:`, error);
     throw new InternalServerError(
       `Failed to fetch user by username: ${error.message}`,
@@ -153,13 +144,13 @@ export const getUserByUsername = async (username) => {
   return user;
 };
 
-export const getUserByClerkId = async (clerkId) => {
+export const getUserByClerkId = async (clerkId: string) => {
   let user;
   try {
     user = await prisma.user.findUnique({
       where: { clerkId },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error fetching user by ID ${clerkId}:`, error);
     throw new InternalServerError(
       `Failed to fetch user by ID: ${error.message}`,
