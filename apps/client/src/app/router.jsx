@@ -4,18 +4,18 @@ import SideBarLayout from "../layouts/SideBarLayout.jsx";
 import ProtectedLayout from "../layouts/ProtectedLayout.jsx";
 import RootIndex from "../layouts/RootIndex.jsx";
 import { PATHS } from "./paths.js";
-import FeedPage from "../features/feed/FeedPage.jsx";
-import MessagesPage from "../features/messages/MessagesPage.jsx";
-import NotificationsPage from "../features/notifications/NotificationsPage.jsx";
-import ProfilePage from "../features/profile/ProfilePage.jsx";
-import ReelsPage from "../features/reels/ReelsPage.jsx";
-import StoryPage from "../features/stories/StoryPage.jsx";
-import SettingsPage from "../features/settings/SettingsPage.jsx";
-import DiscoverPage from "../features/discover/DiscoverPage.jsx";
-import ChatsPage from "../features/messages/ChatsPage.jsx";
-import ConnectionsPage from "../features/connections/ConnectionsPage.jsx";
-import SignInPage from "../features/auth/SignInPage.jsx";
-import SignUpPage from "../features/auth/SignUpPage.jsx";
+import FeedPage from "../features/feed/FeedPage.js";
+import MessagesPage from "../features/messages/MessagesPage.js";
+import NotificationsPage from "../features/notifications/NotificationsPage.js";
+import ProfilePage from "../features/profile/ProfilePage.js";
+import ReelsPage from "../features/reels/ReelsPage.js";
+import StoryPage from "../features/stories/StoryPage.js";
+import SettingsPage from "../features/settings/SettingsPage.js";
+import DiscoverPage from "../features/discover/DiscoverPage.js";
+import ChatsPage from "../features/messages/ChatsPage.js";
+import ConnectionsPage from "../features/connections/ConnectionsPage.js";
+import SignInPage from "../features/auth/SignInPage.js";
+import SignUpPage from "../features/auth/SignUpPage.js";
 
 const router = createBrowserRouter([
   // it renders "/" route based on if the user is authenticated (Feed Page) or not authenticated (Landing page)
