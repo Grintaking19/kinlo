@@ -1,9 +1,9 @@
-import config from "./config/config.ts";
+import config from "./config/config.js";
 import app from "./app.js";
 import ngrok from "@ngrok/ngrok";
 
 const PORT = config.PORT || 3000;
-let ngrokListener;
+let ngrokListener: ngrok.Listener | null = null;
 
 const server = app.listen(PORT, async () => {
   console.log(`Server is running on port ${PORT}`);
@@ -21,12 +21,18 @@ const server = app.listen(PORT, async () => {
   }
 });
 
-const shutdown = async (signal) => {
+const shutdown = async (signal: NodeJS.Signals) => {
   console.log(`Received ${signal}, shutting down...`);
-  if (ngrokListener) {
-    await ngrok.disconnect(ngrokListener.url());
+
+  try {
+    if (ngrokListener) {
+      await ngrok.disconnect(ngrokListener.url());
+    }
+    await ngrok.kill();
+  } catch (error) {
+    console.error("Error during ngrok teardown:", error);
   }
-  await ngrok.kill();
+
   server.close(() => process.exit(0));
 };
 

@@ -33,7 +33,7 @@
     "@prisma/adapter-pg": "^7.9.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
-    "@types/node": "^26.6.2",
+    "@types/node": "^26.6.6",
     "globals": "^17.13.0",
     "nodemon": "^3.1.14",
     "pg": "^8.22.0",
