@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "dev": "nodemon --exec tsx src/server.js",
+    "dev": "nodemon --exec tsx src/server.ts",
     "migrate": "prisma migrate dev",
     "seed": "prisma db seed",
     "postinstall": "prisma generate",

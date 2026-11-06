@@ -85,15 +85,6 @@ export const clerkWebhookHandler = async (
           user: updatedUser,
         });
       }
-      default: {
-        console.log(`Unhandled event: ${event}`);
-        return res
-          .status(200)
-          .json({
-            status: "success",
-            message: `Unhandled event: ${event}`,
-          });
-      }
     }
   } catch (err) {
     next(err); // Pass the error to the error handling middleware
