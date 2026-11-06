@@ -4,7 +4,7 @@ import { UnprocessableEntityError } from "../../lib/errors/AppError.js";
 type ClerkEmailAddress = {
   email_address: string;
   id: string;
-  verification: {
+  verification?: {
     status: string;
     strategy: string;
   };
@@ -16,7 +16,7 @@ type ClerkUserData = {
   first_name: string;
   last_name: string;
   username: string;
-  image_url: string;
+  image_url?: string;
 };
 
 
