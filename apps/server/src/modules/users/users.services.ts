@@ -69,7 +69,7 @@ export const updateUser = async (updateData: UpdateUserPayloadData) => {
   try {
     const updatedUser = await prisma.user.update({
       where: { clerkId },
-      data: updateData,
+      data: userUpdateData,
     });
     return updatedUser;
   } catch (error: any) {

@@ -1,14 +1,30 @@
-import config from "../../config/config.ts";
+import config from "../../config/config.js";
+import type { Request, Response, NextFunction } from "express";
 import { Webhook } from "svix";
 import { createUser, updateUser, deleteUser } from "./users.services.js";
+
 import {
   BadRequestError,
   InternalServerError,
 } from "../../lib/errors/AppError.js";
 
-import { consoleTest } from "../../lib/consoleTest.js";
+// import { consoleTest } from "../../lib/consoleTest.js";
+import type {
+  CreateUserPayloadData,
+  UpdateUserPayloadData,
+  DeleteUserPayloadData,
+} from "./users.types.js";
 
-export const clerkWebhookHandler = async (req, res, next) => {
+type ClerkWebhookEvent =
+  | CreateUserPayloadData
+  | UpdateUserPayloadData
+  | DeleteUserPayloadData;
+
+export const clerkWebhookHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   if (!config.CLERK_WEBHOOK_SECRET) {
     console.error(
       "CLERK_WEBHOOK_SECRET is not set in the environment variables.",
@@ -26,7 +42,7 @@ export const clerkWebhookHandler = async (req, res, next) => {
   }
 
   const wh = new Webhook(config.CLERK_WEBHOOK_SECRET);
-  let event;
+  let event: ClerkWebhookEvent;
 
   try {
     wh.verify(req.body, {
@@ -34,48 +50,49 @@ export const clerkWebhookHandler = async (req, res, next) => {
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
     });
-    event = JSON.parse(req.body.toString(), "utf-8");
+    event = JSON.parse(req.body.toString()) as ClerkWebhookEvent;
   } catch {
     // console.error("Webhook verification failed:");
     return next(new BadRequestError("Webhook verification failed"));
   }
   // console.log("Received Clerk webhook event:", event);
-  const { type, data } = event;
   try {
-    switch (type) {
+    switch (event.type) {
       case "user.created": {
-        consoleTest(`Creating user with ID ${data.username}`);
-        const newUser = await createUser(data);
+        // consoleTest(`Creating user with ID ${data.username}`);
+        const newUser = await createUser(event);
         return res.status(201).json({
           status: "success",
-          message: `User with ID ${data.username} created successfully`,
+          message: `User with ID ${event.data.id} created successfully`,
           user: newUser,
         });
       }
       case "user.deleted": {
         // console.log(`Deleting user with ID ${data.id}`);
-        const deletedUser = await deleteUser(data.id);
+        const deletedUser = await deleteUser(event);
         return res.status(200).json({
           status: "success",
-          message: `User with ID ${data.id} deleted successfully`,
+          message: `User with ID ${event.data.id} deleted successfully`,
           user: deletedUser,
         });
       }
       case "user.updated": {
         // console.log(`Updating user with ID ${data.id}`);
-        const updatedUser = await updateUser(data.id, data);
+        const updatedUser = await updateUser(event);
         return res.status(200).json({
           status: "success",
-          message: `User with ID ${data.id} updated successfully`,
+          message: `User with ID ${event.data.id} updated successfully`,
           user: updatedUser,
         });
       }
       default: {
-        console.log(`Unhandled event type: ${type}`);
-        return res.status(200).json({
-          status: "success",
-          message: `Unhandled event type: ${type}`,
-        });
+        console.log(`Unhandled event: ${event}`);
+        return res
+          .status(200)
+          .json({
+            status: "success",
+            message: `Unhandled event: ${event}`,
+          });
       }
     }
   } catch (err) {
@@ -83,7 +100,7 @@ export const clerkWebhookHandler = async (req, res, next) => {
   }
 };
 
-export const getMeController = async (req, res) => {
+export const getMeController = async (req: Request, res: Response) => {
   const user = req.user; // This is set by the ensureAuthenticated middleware
   console.log("Authenticated user:", user);
   res.status(200).json({
