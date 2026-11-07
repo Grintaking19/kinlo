@@ -1,11 +1,11 @@
 import React from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { User, Settings, LogOut, Moon, HelpCircle } from "lucide-react";
-import Avatar from "../primitives/Avatar.js";
-import { RouterLink } from "../../lib/RouterLink.js";
-import ToggleButton from "../primitives/ToggleButton.js";
+import Avatar from "../primitives/Avatar.tsx";
+import { RouterLink } from "../../lib/RouterLink.tsx";
+import ToggleButton from "../primitives/ToggleButton.tsx";
 import { useClerk } from "@clerk/react";
-import {PATHS} from "../../app/paths.js";
+import {PATHS} from "../../app/paths.ts";
 
 const AccountDropdown = () => {
   const [darkMode, setDarkMode] = React.useState(true);
