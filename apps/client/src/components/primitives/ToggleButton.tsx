@@ -4,8 +4,7 @@ type ToggleButtonProps = {
   "aria-label": string;
   disabled?: boolean;
   className?: string;
-  [key: string]: any; // Allow any other props
-};
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "disabled" | "className" | "onChange" | "aria-label">;
 
 const ToggleButton = ({
   on = false,

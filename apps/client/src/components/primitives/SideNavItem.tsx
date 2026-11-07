@@ -12,9 +12,10 @@ type SideNavItemProps = {
   variant?: Variant;
   "aria-label"?: string;
   notificationCount?: number;
-  [key: string]: any; // Allow any other props
-};
-
+} & Omit<
+  React.ComponentPropsWithoutRef<typeof RouterLink>,
+  "href" | "className" | "aria-label"
+>;
 
 const VARIANTS = {
   minimal: {

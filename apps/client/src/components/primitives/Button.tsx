@@ -15,8 +15,11 @@ type ButtonProps = {
   className?: string;
   disabled?: boolean;
   children: React.ReactNode;
-  [key: string]: any; // Allow any other props
-};
+} & Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "className" | "disabled"
+> &
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className" | "disabled">;
 
 const GRADIENTS = {
   cta: "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end hover:from-gradient-cta-start-hover hover:to-gradient-cta-end-hover shadow-md hover:shadow-lg",

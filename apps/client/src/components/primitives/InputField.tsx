@@ -14,8 +14,7 @@ type InputFieldProps = {
   errorMessage?: string;
   disabled?: boolean;
   "aria-label"?: string;
-  [key: string]: any; // Allow any other props
-};
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "placeholder" | "size" | "className" | "disabled" | "aria-label">;
 
 const SIZES = {
   sm: "text-sm px-3 py-1 rounded-md",

@@ -13,8 +13,7 @@ type NavItemProps = {
   variant?: Variant;
   "aria-label"?: string;
   children?: React.ReactNode;
-  [key: string]: any; // Allow any other props
-};
+} & Omit<React.ComponentPropsWithoutRef<typeof RouterLink>, "href" | "className" | "aria-label">;
 
 
 const SIZES = {

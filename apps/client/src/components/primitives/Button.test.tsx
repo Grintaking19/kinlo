@@ -52,7 +52,7 @@ describe("Button", () => {
   it("renders as RouterLink when 'as' prop is set to RouterLink and href is provided", () => {
     render(
       <MemoryRouter>
-        <Button as={RouterLink} to="/feed">
+        <Button as={RouterLink} href="/feed">
           Go to feed
         </Button>
       </MemoryRouter>,
@@ -96,7 +96,7 @@ describe("Button", () => {
   it("uses aria-disabled attribute for RouterLink when disabled prop is true and blocks clicks", async () => {
     render(
       <MemoryRouter>
-        <Button as={RouterLink} to="/feed" disabled>
+        <Button as={RouterLink} href="/feed" disabled>
           Go to feed
         </Button>
       </MemoryRouter>,
