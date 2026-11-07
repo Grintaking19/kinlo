@@ -1,21 +1,21 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout.js";
-import SideBarLayout from "../layouts/SideBarLayout.js";
-import ProtectedLayout from "../layouts/ProtectedLayout.js";
-import RootIndex from "../layouts/RootIndex.js";
-import { PATHS } from "./paths.js";
-import FeedPage from "../features/feed/FeedPage.js";
-import MessagesPage from "../features/messages/MessagesPage.js";
-import NotificationsPage from "../features/notifications/NotificationsPage.js";
-import ProfilePage from "../features/profile/ProfilePage.js";
-import ReelsPage from "../features/reels/ReelsPage.js";
-import StoryPage from "../features/stories/StoryPage.js";
-import SettingsPage from "../features/settings/SettingsPage.js";
-import DiscoverPage from "../features/discover/DiscoverPage.js";
-import ChatsPage from "../features/messages/ChatsPage.js";
-import ConnectionsPage from "../features/connections/ConnectionsPage.js";
-import SignInPage from "../features/auth/SignInPage.js";
-import SignUpPage from "../features/auth/SignUpPage.js";
+import MainLayout from "../layouts/MainLayout.tsx";
+import SideBarLayout from "../layouts/SideBarLayout.tsx";
+import ProtectedLayout from "../layouts/ProtectedLayout.tsx";
+import RootIndex from "../layouts/RootIndex.tsx";
+import { PATHS } from "./paths.ts";
+import FeedPage from "../features/feed/FeedPage.tsx";
+import MessagesPage from "../features/messages/MessagesPage.tsx";
+import NotificationsPage from "../features/notifications/NotificationsPage.tsx";
+import ProfilePage from "../features/profile/ProfilePage.tsx";
+import ReelsPage from "../features/reels/ReelsPage.tsx";
+import StoryPage from "../features/stories/StoryPage.tsx";
+import SettingsPage from "../features/settings/SettingsPage.tsx";
+import DiscoverPage from "../features/discover/DiscoverPage.tsx";
+import ChatsPage from "../features/messages/ChatsPage.tsx";
+import ConnectionsPage from "../features/connections/ConnectionsPage.tsx";
+import SignInPage from "../features/auth/SignInPage.tsx";
+import SignUpPage from "../features/auth/SignUpPage.tsx";
 
 const router = createBrowserRouter([
   // it renders "/" route based on if the user is authenticated (Feed Page) or not authenticated (Landing page)
