@@ -1,4 +1,18 @@
-import styleIcon from "../../utils/styleIcon.jsx";
+import styleIcon from "../../utils/styleIcon.tsx";
+
+type Size = keyof typeof SIZES;
+type Variant = keyof typeof VARIANTS;
+
+type IconButtonProps = {
+  icon: React.ReactNode | null;
+  size?: Size;
+  active?: boolean;
+  variant?: Variant;
+  "aria-label": string;
+  className?: string;
+  disabled?: boolean;
+  [key: string]: any; // Allow any other props
+};
 
 const SIZES = {
   sm: "w-8 h-8", // 32px — composer bar (video/photo/reel)
@@ -27,7 +41,6 @@ const VARIANTS = {
   },
 };
 
-
 const IconButton = ({
   icon = null,
   size = "md",
@@ -37,7 +50,7 @@ const IconButton = ({
   className = "",
   disabled = false,
   ...props
-}) => {
+}: IconButtonProps) => {
   /**
    * Guarding against missing inputs (icon and aria-label)
    */
@@ -65,12 +78,13 @@ const IconButton = ({
       `IconButton: Invalid variant provided: ${variant}. Valid variants are: ${Object.keys(VARIANTS).join(", ")}. Defaulting to "minimal".`,
     );
     variant = "minimal";
-  } 
-
+  }
 
   const sizeClass = size ? SIZES[size] : SIZES["md"];
   const iconSizeClass = size ? ICON_SIZES[size] : ICON_SIZES["md"];
-  const stateClass = active ? VARIANTS[variant].active : VARIANTS[variant].inactive;
+  const stateClass = active
+    ? VARIANTS[variant].active
+    : VARIANTS[variant].inactive;
 
   // Since we are using lucide-react icons
   const styledIcon = styleIcon(icon, iconSizeClass);

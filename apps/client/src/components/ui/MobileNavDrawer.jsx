@@ -1,12 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import SideNavItem from "../primitives/SideNavItem.jsx";
-import Button from "../primitives/Button.jsx";
+import SideNavItem from "../primitives/SideNavItem.js";
+import Button from "../primitives/Button.js";
 import { sideNavItems } from "../../config/Navigation.jsx";
 import { Plus, Menu } from "lucide-react";
-import IconButton from "../primitives/IconButton.jsx";
+import IconButton from "../primitives/IconButton.js";
 import { useState } from "react";
 import UserRow from "../ui/UserRow.jsx";
-import Logo from "../primitives/Logo.jsx";
+import Logo from "../primitives/Logo.js";
 import {useLocation} from "react-router-dom";
 
 const MobileNavDrawer = () => {

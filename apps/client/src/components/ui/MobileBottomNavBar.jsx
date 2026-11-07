@@ -1,7 +1,7 @@
 import React from "react";
-import { RouterLink } from "../../lib/RouterLink.jsx";
-import NavItem from "../primitives/NavItem";
-import Avatar from "../primitives/Avatar";
+import { RouterLink } from "../../lib/RouterLink.js";
+import NavItem from "../primitives/NavItem.js";
+import Avatar from "../primitives/Avatar.js";
 import { bottomMobileNavItems as navItems } from "../../config/Navigation.jsx";
 import { useLocation } from "react-router-dom";
 

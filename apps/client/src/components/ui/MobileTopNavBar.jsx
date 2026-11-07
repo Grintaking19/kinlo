@@ -1,7 +1,7 @@
 import MobileNavDrawer from "./MobileNavDrawer.jsx";
-import Logo from "../primitives/Logo.jsx";
-import IconButton from "../primitives/IconButton.jsx";
-import NavItem from "../primitives/NavItem.jsx";
+import Logo from "../primitives/Logo.js";
+import IconButton from "../primitives/IconButton.js";
+import NavItem from "../primitives/NavItem.js";
 import { SquarePlus, Search, MessageSquare } from "lucide-react";
 
 const MobileTopNavBar = ({ currentPath = "/" }) => {

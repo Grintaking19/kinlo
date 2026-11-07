@@ -1,3 +1,11 @@
+type ToggleButtonProps = {
+  on: boolean;
+  onChange?: (newState: boolean) => void;
+  "aria-label": string;
+  disabled?: boolean;
+  className?: string;
+  [key: string]: any; // Allow any other props
+};
 
 const ToggleButton = ({
   on = false,
@@ -6,7 +14,7 @@ const ToggleButton = ({
   disabled = false,
   className = "",
   ...props
-}) => {
+}: ToggleButtonProps) => {
   if (import.meta.env.DEV && !ariaLabel) {
     console.error(
       "Toggle: `aria-label` is required — this control has no visible text label.",

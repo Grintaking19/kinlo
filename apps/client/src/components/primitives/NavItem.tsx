@@ -1,5 +1,22 @@
-import { RouterLink } from "../../lib/RouterLink.jsx";
-import styleIcon from "../../utils/styleIcon.jsx";
+import { RouterLink } from "../../lib/RouterLink.tsx";
+import styleIcon from "../../utils/styleIcon.tsx";
+
+type Size = keyof typeof SIZES;
+type Variant = keyof typeof VARIANTS;
+
+type NavItemProps = {
+  href?: string;
+  size?: Size;
+  icon?: React.ReactNode | null;
+  className?: string;
+  active?: boolean;
+  variant?: Variant;
+  "aria-label"?: string;
+  children?: React.ReactNode;
+  [key: string]: any; // Allow any other props
+};
+
+
 const SIZES = {
   sm: "w-9 h-9", // TopBar NavItem (Mobile)
   md: "w-11 h-11", // TopBar NavItem (Desktop)
@@ -42,7 +59,7 @@ const NavItem = ({
   "aria-label": ariaLabel,
   children,
   ...props
-}) => {
+} : NavItemProps) => {
   /**
    * Guarding against Missing/Invalid Props
    */

@@ -1,5 +1,5 @@
-import Avatar from "../primitives/Avatar.jsx";
-import IconButton from "../primitives/IconButton.jsx";
+import Avatar from "../primitives/Avatar.js";
+import IconButton from "../primitives/IconButton.js";
 // import LogoutIcon from "../../assets/icons/logout-icon.svg?react";
 import { LogOut } from "lucide-react";
 import { useClerk } from "@clerk/react";

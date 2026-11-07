@@ -1,6 +1,21 @@
 import React from "react";
-import styleIcon from "../../utils/styleIcon.jsx";
+import styleIcon from "../../utils/styleIcon.tsx";
 import { AlertCircle } from "lucide-react";
+
+type Size = keyof typeof SIZES;
+
+type InputFieldProps = {
+  label?: string;
+  placeholder?: string;
+  size?: Size;
+  icon?: React.ReactNode;
+  className?: string;
+  error?: boolean;
+  errorMessage?: string;
+  disabled?: boolean;
+  "aria-label"?: string;
+  [key: string]: any; // Allow any other props
+};
 
 const SIZES = {
   sm: "text-sm px-3 py-1 rounded-md",
@@ -19,7 +34,7 @@ const InputField = ({
   disabled = false,
   "aria-label": ariaLabel,
   ...props
-}) => {
+}: InputFieldProps) => {
   /**
    * Guarding against invalid or missing values
    */
@@ -38,7 +53,7 @@ const InputField = ({
     );
   }
 
-  const isRenderable = (val) =>
+  const isRenderable = (val: string | number | React.ReactNode | null) =>
     val === null ||
     typeof val === "string" ||
     typeof val === "number" ||

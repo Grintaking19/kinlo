@@ -1,6 +1,6 @@
-import InputField from "../primitives/InputField.jsx";
-import IconButton from "../primitives/IconButton.jsx";
-import NavItem from "../primitives/NavItem.jsx";
+import InputField from "../primitives/InputField.js";
+import IconButton from "../primitives/IconButton.js";
+import NavItem from "../primitives/NavItem.js";
 import NotificationsDropdown from "./NotificationsDropdown.jsx";
 import AccountDropdown from "./AccountDropdown.jsx";
 import { Search, MessageSquare } from "lucide-react";

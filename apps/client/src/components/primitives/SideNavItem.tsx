@@ -1,5 +1,20 @@
-import styleIcon from "../../utils/styleIcon.jsx";
-import { RouterLink } from "../../lib/RouterLink.jsx";
+import styleIcon from "../../utils/styleIcon.js";
+import { RouterLink } from "../../lib/RouterLink.js";
+
+type Variant = keyof typeof VARIANTS;
+type SideNavItemProps = {
+  href?: string;
+  icon?: React.ReactNode | null;
+  label: string | null;
+  className?: string;
+  iconClassName?: string;
+  active?: boolean;
+  variant?: Variant;
+  "aria-label"?: string;
+  notificationCount?: number;
+  [key: string]: any; // Allow any other props
+};
+
 
 const VARIANTS = {
   minimal: {
@@ -19,7 +34,7 @@ const SideNavItem = ({
   "aria-label": ariaLabel,
   notificationCount = 0,
   ...props
-}) => {
+}: SideNavItemProps) => {
   /**
    * Guarding against Missing/Invalid Props
    */

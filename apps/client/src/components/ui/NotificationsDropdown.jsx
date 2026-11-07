@@ -1,6 +1,6 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Bell } from "lucide-react";
-import IconButton from "../primitives/IconButton.jsx";
+import IconButton from "../primitives/IconButton.js";
 
 const NotificationsDropdown = ({ notifications = [] }) => {
   return (

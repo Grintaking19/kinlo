@@ -1,7 +1,7 @@
 import React from "react";
-import Logo from "../primitives/Logo.jsx";
-import SideNavItem from "../primitives/SideNavItem.jsx";
-import Button from "../primitives/Button.jsx";
+import Logo from "../primitives/Logo.js";
+import SideNavItem from "../primitives/SideNavItem.js";
+import Button from "../primitives/Button.js";
 import UserRow from "../ui/UserRow.jsx";
 import { sideNavItems } from "../../config/Navigation.jsx";
 import { Plus } from "lucide-react";

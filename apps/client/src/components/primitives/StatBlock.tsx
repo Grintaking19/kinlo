@@ -1,3 +1,16 @@
+
+type Size = keyof typeof SIZES;
+type Orientation = keyof typeof VARIANTS;
+
+type StatBlockProps = {
+  size?: Size;
+  orientation?: Orientation;
+  gradient?: boolean;
+  number: string | number;
+  label: string;
+  className?: string;
+};
+
 const SIZES = {
   sm: {
     number: "text-base font-bold",
@@ -25,7 +38,7 @@ const StatBlock = ({
   number,
   label,
   className = "",
-}) => {
+}: StatBlockProps) => {
   /**
    * Guarding against Missing/Invalid Props
    */

@@ -1,5 +1,23 @@
-import { RouterLink } from "../../lib/RouterLink.jsx";
-import styleIcon from "../../utils/styleIcon.jsx";
+import { RouterLink } from "../../lib/RouterLink.js";
+import styleIcon from "../../utils/styleIcon.tsx";
+
+type Variant = keyof typeof VARIANTS | null;
+type Size = keyof typeof SIZES | null;
+type Gradient = keyof typeof GRADIENTS | null;
+
+type ButtonProps = {
+  as?: "button" | typeof RouterLink;
+  href?: string;
+  variant?: Variant;
+  size?: Size;
+  gradient?: Gradient;
+  icon?: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+  children: React.ReactNode;
+  [key: string]: any; // Allow any other props
+};
+
 const GRADIENTS = {
   cta: "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end hover:from-gradient-cta-start-hover hover:to-gradient-cta-end-hover shadow-md hover:shadow-lg",
   save: "bg-gradient-to-r from-gradient-save-start to-gradient-save-end hover:from-gradient-save-start-hover hover:to-gradient-save-end-hover shadow-md hover:shadow-lg",
@@ -42,12 +60,12 @@ const Button = ({
   disabled = false,
   children,
   ...props
-}) => {
+}: ButtonProps) => {
   /*
    * Guarding against invalid logical combinations of variant and gradient.
    */
 
-  if (gradient && !["primary"].includes(variant)) {
+  if (gradient && variant !== null && !["primary"].includes(variant)) {
     if (import.meta.env.DEV) {
       console.error(
         `Gradient "${gradient}" is not supported for variant "${variant}". Gradients are only supported for the "primary" variant.`,
@@ -59,7 +77,11 @@ const Button = ({
   /*
    * Guarding against invalid variant and size values. If invalid -> switch to default values and log an error in development mode. This ensures that the Button component always has a valid variant and size, preventing unexpected styling issues.
    */
-  if (!Object.keys(VARIANTS).includes(variant) && variant !== null) {
+  if (
+    variant !== null &&
+    !Object.keys(VARIANTS).includes(variant) &&
+    variant !== null
+  ) {
     if (import.meta.env.DEV) {
       console.error(
         `Invalid variant provided to Button component: ${variant}. Defaulting to "primary".`,
@@ -69,7 +91,7 @@ const Button = ({
     gradient = "cta";
   }
 
-  if (!Object.keys(SIZES).includes(size) && size !== null) {
+  if (size !== null && !Object.keys(SIZES).includes(size) && size !== null) {
     if (import.meta.env.DEV) {
       console.error(
         `Invalid size provided to Button component: ${size}. Defaulting to "md".`,
@@ -93,7 +115,7 @@ const Button = ({
   // Handle NULL values for variant, gradients and size.
   const variantClass = variant ? VARIANTS[variant] : "";
   const gradientClass =
-    variant === "primary" ? GRADIENTS[gradient] || GRADIENTS["cta"] : "";
+    gradient && variant === "primary" ? GRADIENTS[gradient] : "";
   const sizeClass = size ? SIZES[size] : "";
 
   const styledIcon = icon ? styleIcon(icon, "w-4.5 h-4.5") : null;

@@ -1,5 +1,15 @@
 import defaultAvatar from "../../assets/images/default-avatar-profile-icon.avif";
 
+type Size = keyof typeof SIZES | null;
+
+type AvatarProps = {
+  src?: string;
+  size?: Size;
+  alt?: string;
+  className?: string;
+  wrapperClassName?: string;
+};
+
 const SIZES = {
   sm: "w-6 h-6",
   md: "w-8 h-8",
@@ -7,8 +17,14 @@ const SIZES = {
   xl: "w-10 h-10",
 };
 
-const Avatar = ({ src, size = "md", alt = "User Avatar", className = "", wrapperClassName = "" }) => {
-  if (!Object.keys(SIZES).includes(size) && size !== null) {
+const Avatar = ({
+  src,
+  size = "md",
+  alt = "User Avatar",
+  className = "",
+  wrapperClassName = "",
+}: AvatarProps) => {
+  if (size !== null && !Object.keys(SIZES).includes(size)) {
     if (import.meta.env.DEV) {
       console.error(
         `Invalid size provided to Avatar component: ${size}. Defaulting to "md".`,
@@ -35,15 +51,17 @@ const Avatar = ({ src, size = "md", alt = "User Avatar", className = "", wrapper
   const sizeClass = size ? SIZES[size] : SIZES.md;
 
   return (
-    <div className={`overflow-hidden flex shrink-0 rounded-full bg-surface-2 ${sizeClass} ${wrapperClassName}`}>
+    <div
+      className={`overflow-hidden flex shrink-0 rounded-full bg-surface-2 ${sizeClass} ${wrapperClassName}`}
+    >
       <img
         src={src || defaultAvatar}
         alt={alt || "User Avatar"}
         className={`block w-full h-full object-cover rounded-full  ${className}`}
         onError={(e) => {
-          e.target.onerror = null; // Prevents infinite loop if the fallback image also fails
-          e.target.src = defaultAvatar;
-          e.target.alt = alt ?? "Default User Avatar"; // Handles Purly decorative images (Very Edgy Case)
+          e.currentTarget.onerror = null; // Prevents infinite loop if the fallback image also fails
+          e.currentTarget.src = defaultAvatar;
+          e.currentTarget.alt = alt ?? "Default User Avatar"; // Handles Purly decorative images (Very Edgy Case)
         }}
       />
     </div>

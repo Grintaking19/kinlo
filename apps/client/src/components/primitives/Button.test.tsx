@@ -1,11 +1,11 @@
 import { it, expect, describe, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Button from "./Button.jsx";
-import { RouterLink } from "../../lib/RouterLink.jsx";
+import Button from "./Button.tsx";
+import { RouterLink } from "../../lib/RouterLink.tsx";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 
-let errorSpy;
+let errorSpy: ReturnType<typeof vi.spyOn> | undefined;
 
 beforeEach(() => {
   errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
@@ -25,6 +25,7 @@ describe("Button", () => {
   });
 
   it("falls back to default variant and size when invalid values are provided", () => {
+    // @ts-expect-error — intentionally invalid to test the runtime fallback
     render(<Button variant="invalid-variant">Save</Button>);
 
     const button = screen.getByRole("button", { name: "Save" });
@@ -38,6 +39,7 @@ describe("Button", () => {
   });
 
   it("falls back to default size when invalid values are provided", () => {
+    // @ts-expect-error — intentionally invalid to test the runtime fallback
     render(<Button size="invalid-size">Save</Button>);
 
     const button = screen.getByRole("button", { name: "Save" });
