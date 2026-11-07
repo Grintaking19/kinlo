@@ -32,7 +32,7 @@ const ToggleButton = ({
         relative inline-flex items-center justify-center
          w-10 h-5.5 rounded-full
         text-text
-        ${on ? "bg-gradient-to-r from-gradient-cta-start to-gradient-cta-end" : "bg-avatar-fallback"}
+        ${on ? "bg-linear-to-r from-gradient-cta-start to-gradient-cta-end" : "bg-avatar-fallback"}
         hover:cursor-pointer
         disabled:cursor-not-allowed disabled:opacity-50
         transition-colors duration-200

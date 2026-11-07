@@ -1,9 +1,9 @@
-import Avatar from "../primitives/Avatar.js";
-import IconButton from "../primitives/IconButton.js";
+import Avatar from "../primitives/Avatar.tsx";
+import IconButton from "../primitives/IconButton.tsx";
 // import LogoutIcon from "../../assets/icons/logout-icon.svg?react";
 import { LogOut } from "lucide-react";
 import { useClerk } from "@clerk/react";
-import { PATHS } from "../../app/paths.js";
+import { PATHS } from "../../app/paths.ts";
 const UserRow = ({ fullName = "John Doe", username = "john_doe" }) => {
   const { signOut } = useClerk();
   return (

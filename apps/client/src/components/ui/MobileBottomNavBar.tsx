@@ -1,8 +1,8 @@
 import React from "react";
-import { RouterLink } from "../../lib/RouterLink.js";
-import NavItem from "../primitives/NavItem.js";
-import Avatar from "../primitives/Avatar.js";
-import { bottomMobileNavItems as navItems } from "../../config/Navigation.jsx";
+import { RouterLink } from "../../lib/RouterLink.tsx";
+import NavItem from "../primitives/NavItem.tsx";
+import Avatar from "../primitives/Avatar.tsx";
+import { bottomMobileNavItems as navItems } from "../../config/Navigation.tsx";
 import { useLocation } from "react-router-dom";
 
 const MobileBottomNavBar = () => {
@@ -24,7 +24,6 @@ const MobileBottomNavBar = () => {
 
       <RouterLink
         href="/profile"
-        active={location.pathname === "/profile"}
         aria-label="Profile"
         aria-current={"/profile" === location.pathname ? "page" : undefined}
         className={`flex items-center justify-center 

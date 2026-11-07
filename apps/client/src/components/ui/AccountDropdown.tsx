@@ -84,7 +84,7 @@ const AccountDropdown = () => {
             onSelect={() => {
               signOut({ redirectUrl: PATHS.ROOT });
             }}
-            className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-red-500 hover:bg-surface-2 outline-none data-[highlighted]:bg-surface-2 cursor-pointer"
+            className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-red-500 hover:bg-surface-2 outline-none data-highlighted:bg-surface-2 cursor-pointer"
           >
             <LogOut size={16} /> Log out
           </DropdownMenu.Item>

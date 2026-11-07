@@ -1,4 +1,4 @@
-import SideNavBar from "../components/ui/SideNavBar.jsx";
+import SideNavBar from "../components/ui/SideNavBar.js";
 import { Outlet } from "react-router-dom";
 
 

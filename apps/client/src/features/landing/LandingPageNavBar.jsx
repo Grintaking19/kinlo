@@ -3,7 +3,7 @@ import Logo from "../../components/primitives/Logo.js";
 import Button from "../../components/primitives/Button.js";
 import NavItem from "../../components/primitives/NavItem.js";
 import { useLocation } from "react-router-dom";
-import { landingPageNavItems } from "../../config/Navigation.jsx";
+import { landingPageNavItems } from "../../config/Navigation.js";
 
 const LandingPageNavBar = () => {
   const location = useLocation();

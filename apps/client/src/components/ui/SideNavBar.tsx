@@ -1,9 +1,9 @@
 import React from "react";
-import Logo from "../primitives/Logo.js";
-import SideNavItem from "../primitives/SideNavItem.js";
-import Button from "../primitives/Button.js";
-import UserRow from "../ui/UserRow.jsx";
-import { sideNavItems } from "../../config/Navigation.jsx";
+import Logo from "../primitives/Logo.tsx";
+import SideNavItem from "../primitives/SideNavItem.tsx";
+import Button from "../primitives/Button.tsx";
+import UserRow from "./UserRow.tsx";
+import { sideNavItems } from "../../config/Navigation.tsx";
 import { Plus } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
