@@ -64,7 +64,7 @@ const AccountDropdown = () => {
             </span>
             <ToggleButton
               on={darkMode}
-              setOn={setDarkMode}
+              onChange={setDarkMode}
               aria-label="Toggle dark mode"
             />
           </div>
