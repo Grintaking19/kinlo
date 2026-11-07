@@ -1,4 +1,4 @@
-import LandingPageNavBar from "./LandingPageNavBar.jsx";
+import LandingPageNavBar from "./LandingPageNavBar.tsx";
 const LandingPage = () => {
   return (
     <>

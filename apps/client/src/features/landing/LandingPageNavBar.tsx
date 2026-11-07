@@ -1,9 +1,9 @@
-import { RouterLink } from "../../lib/RouterLink.js";
-import Logo from "../../components/primitives/Logo.js";
-import Button from "../../components/primitives/Button.js";
-import NavItem from "../../components/primitives/NavItem.js";
+import { RouterLink } from "../../lib/RouterLink.tsx";
+import Logo from "../../components/primitives/Logo.tsx";
+import Button from "../../components/primitives/Button.tsx";
+import NavItem from "../../components/primitives/NavItem.tsx";
 import { useLocation } from "react-router-dom";
-import { landingPageNavItems } from "../../config/Navigation.js";
+import { landingPageNavItems } from "../../config/Navigation.tsx";
 
 const LandingPageNavBar = () => {
   const location = useLocation();
