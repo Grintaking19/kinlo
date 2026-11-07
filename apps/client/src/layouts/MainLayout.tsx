@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import TopNavBar from "../components/ui/TopNavBar.js";
-import MobileTopNavBar from "../components/ui/MobileTopNavBar.js";
-import MobileBottomNavBar from "../components/ui/MobileBottomNavBar.js";
+import TopNavBar from "../components/ui/TopNavBar.tsx";
+import MobileTopNavBar from "../components/ui/MobileTopNavBar.tsx";
+import MobileBottomNavBar from "../components/ui/MobileBottomNavBar.tsx";
 
 const MainLayout = () => {
   return (

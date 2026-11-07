@@ -1,6 +1,5 @@
-import SideNavBar from "../components/ui/SideNavBar.js";
+import SideNavBar from "../components/ui/SideNavBar.tsx";
 import { Outlet } from "react-router-dom";
-
 
 const SideBarLayout = () => {
   return (

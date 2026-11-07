@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout.jsx";
-import SideBarLayout from "../layouts/SideBarLayout.jsx";
-import ProtectedLayout from "../layouts/ProtectedLayout.jsx";
-import RootIndex from "../layouts/RootIndex.jsx";
+import MainLayout from "../layouts/MainLayout.js";
+import SideBarLayout from "../layouts/SideBarLayout.js";
+import ProtectedLayout from "../layouts/ProtectedLayout.js";
+import RootIndex from "../layouts/RootIndex.js";
 import { PATHS } from "./paths.js";
 import FeedPage from "../features/feed/FeedPage.js";
 import MessagesPage from "../features/messages/MessagesPage.js";
